@@ -1,0 +1,6 @@
+﻿  Application.cpp
+  Bullet.cpp
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Bullet.cpp(78,16): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Bullet.cpp(79,20): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+  Создание кода...
+  Battle_Project.vcxproj -> C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\x64\Debug\Battle_Project.exe
