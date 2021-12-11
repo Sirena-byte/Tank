@@ -29,6 +29,12 @@ public:
     Application();
 
     void process_events();
-    void update(const sf::Int64 &time);
+    void update(const sf::Int64& time);
     void render();
+
+
+    float GetRandomFloat(float min, float max);
+
+    int createTimer;
+    float time;
 };

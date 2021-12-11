@@ -9,7 +9,7 @@ Enemy::Enemy(const float &x, const float &y)
 
 void Enemy::move(const sf::Int64 &time) {
     mSpeed = 0.1f;//скорость
-    timeBeforeMoving += time;//???
+    timeBeforeMoving += time;//таймер
 
     if (timeBeforeMoving > 1000 + rand() % 501) {//отрезок времени
         mDir = rand() % 4;//рандомно выбирается направление

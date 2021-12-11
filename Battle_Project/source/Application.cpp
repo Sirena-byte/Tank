@@ -1,6 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include "Application.h"
+#include<sstream>
+#include<iostream>
 
+using namespace std;
 Application::Application()
     : mWindow(sf::VideoMode(720, 672), "Battle City"), gameOver(false), gameStarted(false),//основное окно
     msgStart(90, 330, "Press \'Enter\' to start"), msgOver(250, 300, "Game over"),
@@ -8,7 +11,10 @@ Application::Application()
 
     sf::Clock clock;
 
-    packOfEnemies = new Enemy[4]{ Enemy(52,31), Enemy(147,391), Enemy(532,391), Enemy(628,31) };
+    packOfEnemies = new Enemy[4] { Enemy(52,31), Enemy(147,391), Enemy(532,391), Enemy(628,31) };//массив с врагами
+    
+
+
 
     while (mWindow.isOpen()) {
         sf::Int64 time = clock.getElapsedTime().asMicroseconds();
@@ -37,7 +43,8 @@ void Application::process_events() {
     }
 }
 
-void Application::update(const sf::Int64 &time) {
+void Application::update(const sf::Int64& time) {
+   
     for (int i(0); i < 4; ++i)
         if (!packOfEnemies[i].life)//если все враги мертвы
             ++frags;
@@ -51,14 +58,16 @@ void Application::update(const sf::Int64 &time) {
 
     if (!mPlayer.life)//если мертв игрок
         gameOver = true;//конец игры
-
+   //==============================================================================//
+    //================================================================================//
+    //==============================================================================//
     bool collision;
     for (int i(0); i < 4; ++i) {
         collision = mPlayer.mSprite.getGlobalBounds().intersects(packOfEnemies[i].mSprite.getGlobalBounds());
         if (collision)
             break;
     }
-
+    //============================================================
     if (mPlayer.life)
         mPlayer.update(time, map, collision);
 
@@ -93,19 +102,41 @@ void Application::update(const sf::Int64 &time) {
 }
 
 void Application::render() {//визуализация приложения
+
     mWindow.clear();//очистка окна
     map.draw(mWindow);//рисуем карту
     if (mPlayer.life)//если игрок жив
         mWindow.draw(mPlayer.mSprite);//рисуем игрока
     if (mPlayer.bullet.present) mWindow.draw(mPlayer.bullet.mSprite);//если пули есть- рисуем пули
 
-    for (int i(0); i < 4; ++i) {//цикл от 0 до 4
-        if (packOfEnemies[i].bullet.present)// если у врагов есть пули
-            mWindow.draw(packOfEnemies[i].bullet.mSprite);//то рисуем пули
+    
+    sf::Clock clock;
+    time = clock.getElapsedTime().asMicroseconds();
 
-        if (packOfEnemies[i].life)//если враг жив
-            mWindow.draw(packOfEnemies[i].mSprite);//рисуем врага
+    //====================================================================================//
+    createTimer = 0;
+    for (int i(0); i < 4; ++i) {//цикл от 0 до 4
+        createTimer += time;
+        cout << "createTimer= "<<createTimer<<"\ntime= "<<time << endl;
+       /* if (createTimer > 3000) {
+            {
+      
+            */
+                if (packOfEnemies[i].bullet.present)// если у врагов есть пули
+                    mWindow.draw(packOfEnemies[i].bullet.mSprite);//то рисуем пули
+
+                if (packOfEnemies[i].life)//если враг жив
+                    mWindow.draw(packOfEnemies[i].mSprite);//рисуем врага
+                createTimer = 0;
+              
+      // }
     }
+
+   // packOfEnemies = new Enemy[4]{/* Enemy(52,31), Enemy(147,391), Enemy(532,391), Enemy(628,31) */ };//массив с врагами
+//=========================================================================================//
+
+
+
 
     if (mBase.life)//если база жива
         mWindow.draw(mBase.mSprite);//рисуем базу
@@ -123,4 +154,9 @@ void Application::render() {//визуализация приложения
     }
 
     mWindow.display();//отрисовка окна
+}
+//получить рандомное число
+float GetRandomFloat(float min, float max)
+{
+    return (min + (max - min) * (rand() % 101 / 100.0));
 }
