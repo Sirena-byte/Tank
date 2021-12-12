@@ -107,5 +107,5 @@ void Map::draw(sf::RenderWindow& window) {//функци¤ отрисовки к
 
 
 void Map::break_wall(const int& i, const int& j) {
-    TileMap[i][j] = ' ';
+    TileMap[i][j] = '.';
 }

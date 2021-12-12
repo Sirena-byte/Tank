@@ -9,11 +9,11 @@
 
 class Application : private sf::NonCopyable {
 private:
-    bool gameOver;//êîíåö èãðû
-    bool gameStarted;//íà÷àëî
+    bool gameOver;
+    bool gameStarted;
     int level;
 
-    int frags;//ñ÷èòàåò óáèòûõ âðàãîâ
+    int frags;
    // int score;
     sf::RenderWindow mWindow;
     sf::Font font;
@@ -27,14 +27,14 @@ private:
     Player mPlayer;
     Enemy* packOfEnemies;
 
-    //ôóíêöèè âûâîäà ñîîáùåíèé
-    Message msgStart;//ñòàðò
-    Message msgOver;//êîíåö
-    Message msgLost;
-    Message msgWon;//ïîáåäà
+   
+    //Message msgStart;
+   // Message msgOver;
+   // Message msgLost;
+   // Message msgWon;
 public:
     Application();
-
+    void initialize();
     void process_events();
     void update(const sf::Int64& time);
     void render();

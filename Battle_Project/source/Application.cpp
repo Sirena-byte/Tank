@@ -2,16 +2,21 @@
 #include "Application.h"
 #include<sstream>
 #include<iostream>
-#include"Info.h"
+
 
 
 using namespace std;
 
 Application::Application()
-    : mWindow(sf::VideoMode(1000, 672), "Battle City"), gameOver(false), gameStarted(false),//îñíîâíîå îêíî
-    msgStart(90, 330, "Press \'Enter\' to start"), msgOver(250, 300, "Game over"),
-    msgLost(260, 350, "You lost"), msgWon(265, 350, "You won"), frags(0) {
-
+    : mWindow(sf::VideoMode(1000, 672), "Battle City"), gameOver(false), gameStarted(false);
+   /* msgStart(90, 330, "Press \'Enter\' to start"), msgOver(250, 300, "Game over"),
+    msgLost(260, 350, "You lost"), msgWon(265, 350, "You won"),*/ 
+    frags(0)
+    {
+    initialize();
+    }
+void Application::initialize()
+{
     sf::Clock clock;
 
     packOfEnemies = new Enemy[4]{ Enemy(26,31), Enemy(121,391), Enemy(506,391), Enemy(602,31) };
@@ -26,18 +31,20 @@ Application::Application()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
             gameStarted = true;
 
-        if (gameStarted && !gameOver)//åñëè íà÷àëî è íå êîíåö
+        if (gameStarted && !gameOver)
             update(time);
         render();
     }
 }
 
-
-void Application::process_events() {
+void Application::process_events() 
+{
     sf::Event event;
 
-    while (mWindow.pollEvent(event)) {
-        switch (event.type) {
+    while (mWindow.pollEvent(event)) 
+    {
+        switch (event.type) 
+        {
         case sf::Event::Closed:
             mWindow.close();
             break;
@@ -45,12 +52,14 @@ void Application::process_events() {
     }
 }
 
-void Application::update(const sf::Int64& time) {
+void Application::update(const sf::Int64& time) 
+{
 
     for (int i(0); i < 4; ++i)
-        if (!packOfEnemies[i].life)//åñëè âñå âðàãè ìåðòâû
+        if (!packOfEnemies[i].life)
             ++frags;
-        else {
+        else 
+        {
             frags = 0;
             break;
         }
@@ -58,17 +67,19 @@ void Application::update(const sf::Int64& time) {
     if (frags == 4)
     {
         gameOver = true;//êîíåö èãðû
-        Application::Application();//ðåñòàðò èãðû
+        initialize();
     }
 
-    if (!mPlayer.life)//åñëè ìåðòâ èãðîê
+    if (!mPlayer.life)
     {
-        gameOver = true;//êîíåö èãðû
-        Application::Application();//ðåñòàðò èãðû
+        gameOver = true;
+      
+        initialize();
     }
 
     bool collision;
-    for (int i(0); i < 4; ++i) {
+    for (int i(0); i < 4; ++i) 
+    {
         collision = mPlayer.mSprite.getGlobalBounds().intersects(packOfEnemies[i].mSprite.getGlobalBounds());
         if (collision)
             break;
@@ -77,86 +88,91 @@ void Application::update(const sf::Int64& time) {
     if (mPlayer.life)
         mPlayer.update(time, map, collision);
 
-    for (int i(0); i < 4; ++i) {
-        if (packOfEnemies[i].life) {//åñëè åñòü â íàëè÷èè âðàãè
-            packOfEnemies[i].update(time, map, collision);//èíèöèàëèçèðóåì âðàãà
+    for (int i(0); i < 4; ++i) 
+    {
+        if (packOfEnemies[i].life) 
+        {
+            packOfEnemies[i].update(time, map, collision);
 
             if (packOfEnemies[i].bullet.mSprite.getGlobalBounds().intersects(mPlayer.mSprite.getGlobalBounds())
-                && packOfEnemies[i].bullet.present) {
+                && packOfEnemies[i].bullet.present) 
+            {
                 mPlayer.collapse();
-                packOfEnemies[i].bullet.present = false;//åñëè ïóëÿ âðàãà ïåðåñå÷åòñÿ ñ èãðîêîì, òî ïóëÿ ìåðòâà
+                packOfEnemies[i].bullet.present = false;
             }
 
             if (packOfEnemies[i].bullet.mSprite.getGlobalBounds().intersects(mBase.mSprite.getGlobalBounds())
-                && packOfEnemies[i].bullet.present) {
-                mBase.life = false;//åñëè ïóëÿ ïîïàäåò â øòàá, òî øòàá ìåðòâ
-                gameOver = true;//èãðà îêîí÷åíà
+                && packOfEnemies[i].bullet.present)
+            {
+                mBase.life = false;
+                gameOver = true;
             }
-            if (mPlayer.bullet.mSprite.getGlobalBounds().intersects(packOfEnemies[i].mSprite.getGlobalBounds())//åñëè ïóëÿ èãðîêà ïîïàäåò âî âðàãà
-                && mPlayer.bullet.present) {
-                packOfEnemies[i].collapse();//ìèíóñ îäèí âðàã
-                mPlayer.playerScore += 200;//äîáàâëÿåì î÷êè
-                cout << mPlayer.playerScore << endl;////////////////////////
-                mPlayer.bullet.present = false;//ïóëÿ ìåðòâà
+            if (mPlayer.bullet.mSprite.getGlobalBounds().intersects(packOfEnemies[i].mSprite.getGlobalBounds())
+                && mPlayer.bullet.present) 
+            {
+                packOfEnemies[i].collapse();
+                mPlayer.playerScore += 200;
+                cout << mPlayer.playerScore << endl;
+                mPlayer.bullet.present = false;
             }
         }
     }
 
-    if (mPlayer.bullet.mSprite.getGlobalBounds().intersects(mBase.mSprite.getGlobalBounds())//åñëè ïóëÿ èãðîêà ïîïàäåò â øòàá
-        && mPlayer.bullet.present) {
-        mBase.life = false;//áàçà ìåðòâà
-        gameOver = true;//êîíåö èãðû
+    if (mPlayer.bullet.mSprite.getGlobalBounds().intersects(mBase.mSprite.getGlobalBounds())
+        && mPlayer.bullet.present)
+    {
+        mBase.life = false;
+        gameOver = true;
     }
 
 }
 
 
-void Application::render() {//âèçóàëèçàöèÿ ïðèëîæåíèÿ
+void Application::render() 
+{
     font.loadFromFile("media/PressStart2P.ttf");
     sf::Text text("", font, 20);
-    text.setOutlineColor(sf::Color::White);// èíèöèàëèçàöèÿ òåêñòà â èíôî êîëîíêå
+    text.setOutlineColor(sf::Color::White);
 
 
-    mWindow.clear();//î÷èñòêà îêíà
+    mWindow.clear();
 
-
-
-    map.draw(mWindow);//ðèñóåì êàðòó
-    if (mPlayer.life)//åñëè èãðîê æèâ
+    map.draw(mWindow);
+    if (mPlayer.life)
     {
-        mWindow.draw(mPlayer.mSprite); //ðèñóåì èãðîêà
-
-
+        mWindow.draw(mPlayer.mSprite); 
     }
-    if (mPlayer.bullet.present) mWindow.draw(mPlayer.bullet.mSprite);//åñëè ïóëè åñòü- ðèñóåì ïóëè
+    if (mPlayer.bullet.present) mWindow.draw(mPlayer.bullet.mSprite);
 
 
-    for (int i(0); i < 4; ++i) {//öèêë îò 0 äî 4
+    for (int i(0); i < 4; ++i) 
+    {
 
-        if (packOfEnemies[i].bullet.present)// åñëè ó âðàãîâ åñòü ïóëè
-            mWindow.draw(packOfEnemies[i].bullet.mSprite);//òî ðèñóåì ïóëè
+        if (packOfEnemies[i].bullet.present)
+            mWindow.draw(packOfEnemies[i].bullet.mSprite);
 
-        if (packOfEnemies[i].life)//åñëè âðàã æèâ
-            mWindow.draw(packOfEnemies[i].mSprite);//ðèñóåì âðàãà
+        if (packOfEnemies[i].life)
+            mWindow.draw(packOfEnemies[i].mSprite);
     }
 
 
 
 
 
-    if (mBase.life)//åñëè áàçà æèâà
-        mWindow.draw(mBase.mSprite);//ðèñóåì áàçó
+    if (mBase.life)
+        mWindow.draw(mBase.mSprite);
 
     if (!gameStarted)
-        msgStart.print(mWindow);//îêíî î çàïóñêå èãðû
+       // msgStart.print(mWindow);
 
-    if (gameOver) {//åñëè êîíåö èãðû
-        msgOver.print(mWindow);//òîæå êàêîå-òî îêíî
-        if (!mBase.life || !mPlayer.life)//åñëè áàçà ìåðòâà èëè ìåðòâ èãðîê
-
-            msgLost.print(mWindow);
-        else
-            msgWon.print(mWindow);
+    if (gameOver) {
+       // msgOver.print(mWindow);
+        if (!mBase.life || !mPlayer.life)
+        {
+            //    msgLost.print(mWindow);
+        }
+        //else
+          //  msgWon.print(mWindow);
     }
 
 
