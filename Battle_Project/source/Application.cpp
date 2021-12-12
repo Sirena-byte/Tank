@@ -2,27 +2,31 @@
 #include "Application.h"
 #include<sstream>
 #include<iostream>
+#include"Info.h"
+
 
 using namespace std;
-Application::Application()
-    : mWindow(sf::VideoMode(900, 672), "Battle City"), gameOver(false), gameStarted(false),//основное окно
-    msgStart(90, 330, "Press \'Enter\' to start"), msgOver(250, 300, "Game over"),
-    msgLost(260, 350, "You lost"), msgWon(265, 350, "You won"), frags(0) {
 
+Application::Application()
+    : mWindow(sf::VideoMode(1000, 672), "Battle City"), gameOver(false), gameStarted(false),//основное окно
+    msgStart(90, 330, "Press \'Enter\' to start"), msgOver(250, 300, "Game over"),
+    msgLost(260, 350, "You lost"), msgWon(265, 350, "You won"), frags(0){
+
+   
     sf::Clock clock;
 
-    packOfEnemies = new Enemy[4] { Enemy(52,31), Enemy(147,391), Enemy(532,391), Enemy(628,31) };//массив с врагами
-    
-
+    packOfEnemies = new Enemy[4]{ Enemy(52,31), Enemy(147,391), Enemy(532,391), Enemy(628,31) };
+   
+   
 
 
     while (mWindow.isOpen()) {
         sf::Int64 time = clock.getElapsedTime().asMicroseconds();
         clock.restart();
         time /= 800;
-
+        
         process_events();
-
+     
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
             gameStarted = true;
 
@@ -32,8 +36,14 @@ Application::Application()
     }
 }
 
+
 void Application::process_events() {
     sf::Event event;
+
+    
+    
+
+
     while (mWindow.pollEvent(event)) {
         switch (event.type) {
             case sf::Event::Closed:
@@ -45,6 +55,8 @@ void Application::process_events() {
 
 void Application::update(const sf::Int64& time) {
    
+    
+
     for (int i(0); i < 4; ++i)
         if (!packOfEnemies[i].life)//если все враги мертвы
             ++frags;
@@ -58,16 +70,14 @@ void Application::update(const sf::Int64& time) {
 
     if (!mPlayer.life)//если мертв игрок
         gameOver = true;//конец игры
-   //==============================================================================//
-    //================================================================================//
-    //==============================================================================//
+  
     bool collision;
     for (int i(0); i < 4; ++i) {
         collision = mPlayer.mSprite.getGlobalBounds().intersects(packOfEnemies[i].mSprite.getGlobalBounds());
         if (collision)
             break;
     }
-    //============================================================
+ 
     if (mPlayer.life)
         mPlayer.update(time, map, collision);
 
@@ -90,7 +100,7 @@ void Application::update(const sf::Int64& time) {
                 && mPlayer.bullet.present) {
                 packOfEnemies[i].collapse();//минус один враг
                 mPlayer.playerScore += 200;//добавляем очки
-                cout << mPlayer.playerScore << endl;
+                cout << mPlayer.playerScore << endl;////////////////////////
                 mPlayer.bullet.present = false;//пуля мертва
             }
         }
@@ -101,44 +111,47 @@ void Application::update(const sf::Int64& time) {
         mBase.life = false;//база мертва
         gameOver = true;//конец игры
     }
+   
 }
 
+
 void Application::render() {//визуализация приложения
+    font.loadFromFile("media/PressStart2P.ttf");
+    sf::Text text("", font, 20);
+    text.setOutlineColor(sf::Color::White);// инициализация текста в инфо колонке
+
 
     mWindow.clear();//очистка окна
+
+   
+
     map.draw(mWindow);//рисуем карту
     if (mPlayer.life)//если игрок жив
-        mWindow.draw(mPlayer.mSprite);//рисуем игрока
+    {
+        mWindow.draw(mPlayer.mSprite); //рисуем игрока
+      
+       
+    }
     if (mPlayer.bullet.present) mWindow.draw(mPlayer.bullet.mSprite);//если пули есть- рисуем пули
-
+   
     
     for (int i(0); i < 4; ++i) {//цикл от 0 до 4
       
-        //cout << "createTimer= "<<createTimer<<"\ntime= "<<time << endl;
-       /* if (createTimer > 3000) {
-            {
-      
-            */
                 if (packOfEnemies[i].bullet.present)// если у врагов есть пули
                     mWindow.draw(packOfEnemies[i].bullet.mSprite);//то рисуем пули
 
                 if (packOfEnemies[i].life)//если враг жив
                     mWindow.draw(packOfEnemies[i].mSprite);//рисуем врага
-             
-              
-      // }
     }
-
-   // packOfEnemies = new Enemy[4]{/* Enemy(52,31), Enemy(147,391), Enemy(532,391), Enemy(628,31) */ };//массив с врагами
-//=========================================================================================//
-
-
-
+    
+    
+    
+  
 
     if (mBase.life)//если база жива
         mWindow.draw(mBase.mSprite);//рисуем базу
 
-    if (!gameStarted)//если не начало игры
+    if (!gameStarted)
         msgStart.print(mWindow);//окно о запуске игры
 
     if (gameOver) {//если конец игры
@@ -149,6 +162,13 @@ void Application::render() {//визуализация приложения
         else
             msgWon.print(mWindow);
     }
+
+   
+    std::ostringstream info;
+    info << mPlayer.playerScore;
+    text.setString("score: " + info.str());
+    text.setPosition(750, 30);
+    mWindow.draw(text);
 
     mWindow.display();//отрисовка окна
 }

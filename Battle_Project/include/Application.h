@@ -5,26 +5,33 @@
 #include "Enemy.h"
 #include "Base.h"
 #include "Message.h"
+#include<sstream>
 
 class Application : private sf::NonCopyable {
 private:
-    bool gameOver;//начало игры
-    bool gameStarted;//конец игры
+    bool gameOver;//конец игры
+    bool gameStarted;//начало
+    int level;
 
-    int frags;
-
+    int frags;//считает убитых врагов
+   // int score;
     sf::RenderWindow mWindow;
+    sf::Font font;
+    sf::Text text;
+   
+
+
+
     Base mBase;
     Map map;
     Player mPlayer;
     Enemy *packOfEnemies;
-
+ 
     //функции вывода сообщений
     Message msgStart;//старт
     Message msgOver;//конец
     Message msgLost;
     Message msgWon;//победа
-
 public:
     Application();
 

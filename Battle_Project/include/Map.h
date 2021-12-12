@@ -10,8 +10,13 @@ private:
     static const int WIDTH_MAP = 30;
 
     sf::String *TileMap;
+    //vector<string>TileMap;
+   
     sf::Texture mTexture;
     sf::Sprite mSprite;
+ 
+    
+    
 
 public:
     Map();
@@ -19,4 +24,5 @@ public:
     void break_wall(const int &i, const int &j);//ломать стену
     const char get_tile(const int &i, const int &j) { return TileMap[i][j]; }// функция получения тайла
     void draw(sf::RenderWindow &window);//рисует окно
+   
 };
