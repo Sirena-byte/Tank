@@ -56,10 +56,16 @@ void Application::update(const sf::Int64& time) {
         }
 
     if (frags == 4)
+    {
         gameOver = true;//конец игры
+        Application::Application();//рестарт игры
+    }
 
     if (!mPlayer.life)//если мертв игрок
+    {
         gameOver = true;//конец игры
+        Application::Application();//рестарт игры
+    }
   
     bool collision;
     for (int i(0); i < 4; ++i) {
