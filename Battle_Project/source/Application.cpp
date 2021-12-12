@@ -3,14 +3,12 @@
 #include<sstream>
 #include<iostream>
 
-
-
 using namespace std;
 
 Application::Application()
-    : mWindow(sf::VideoMode(1000, 672), "Battle City"), gameOver(false), gameStarted(false);
+    : mWindow(sf::VideoMode(1000, 672), "Battle City"), gameOver(false), gameStarted(false),
    /* msgStart(90, 330, "Press \'Enter\' to start"), msgOver(250, 300, "Game over"),
-    msgLost(260, 350, "You lost"), msgWon(265, 350, "You won"),*/ 
+    msgLost(260, 350, "You lost"), msgWon(),*/ 
     frags(0)
     {
     initialize();
@@ -66,7 +64,7 @@ void Application::update(const sf::Int64& time)
 
     if (frags == 4)
     {
-        gameOver = true;//êîíåö èãðû
+        gameOver = true;
         initialize();
     }
 
@@ -128,24 +126,29 @@ void Application::update(const sf::Int64& time)
 }
 
 
-void Application::render() 
+void Application::render() //отрисовка
 {
     font.loadFromFile("media/PressStart2P.ttf");
     sf::Text text("", font, 20);
     text.setOutlineColor(sf::Color::White);
-
+    std::ostringstream info;
 
     mWindow.clear();
 
-    map.draw(mWindow);
-    if (mPlayer.life)
+    map.draw(mWindow);//рисуем карту
+
+    if (mPlayer.life)//если игрок жив- рисуем игрока
     {
         mWindow.draw(mPlayer.mSprite); 
     }
-    if (mPlayer.bullet.present) mWindow.draw(mPlayer.bullet.mSprite);
+
+    if (mPlayer.bullet.present)//рисуем пули
+    {
+        mWindow.draw(mPlayer.bullet.mSprite);
+    }
 
 
-    for (int i(0); i < 4; ++i) 
+    for (int i(0); i < 4; ++i) //рисуем врагов
     {
 
         if (packOfEnemies[i].bullet.present)
@@ -155,32 +158,43 @@ void Application::render()
             mWindow.draw(packOfEnemies[i].mSprite);
     }
 
-
-
-
-
-    if (mBase.life)
+    if (mBase.life)//рисуем базу
+    {
         mWindow.draw(mBase.mSprite);
-
-    if (!gameStarted)
-       // msgStart.print(mWindow);
-
-    if (gameOver) {
-       // msgOver.print(mWindow);
-        if (!mBase.life || !mPlayer.life)
-        {
-            //    msgLost.print(mWindow);
-        }
-        //else
-          //  msgWon.print(mWindow);
     }
 
+    if (!gameStarted)
+    {
+        text.setString("Press \'Enter\' to start");//выводим очки игрока
+        text.setPosition(90,330);
+        mWindow.draw(text);
+    }
+     
+    if (gameOver) 
+    {
+        text.setString("Game over");//выводим очки игрока
+        text.setPosition(250, 300);
+        mWindow.draw(text);
 
-    std::ostringstream info;
+        if (!mBase.life || !mPlayer.life)
+        {
+             
+            text.setString("You lost");//выводим очки игрока
+            text.setPosition(260, 350);
+            mWindow.draw(text);
+        }
+        else
+        {
+            text.setString("You won");//выводим очки игрока
+            text.setPosition(265, 350);
+            mWindow.draw(text);
+        }
+    }
+
     info << mPlayer.playerScore;
-    text.setString("score: " + info.str());
+    text.setString("score: " + info.str());//выводим очки игрока
     text.setPosition(750, 30);
     mWindow.draw(text);
 
-    mWindow.display();//îòðèñîâêà îêíà
+    mWindow.display();
 }
