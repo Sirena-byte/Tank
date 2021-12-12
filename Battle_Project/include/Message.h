@@ -12,7 +12,7 @@ private:
     
 public:
     Message(const float& x, const float& y, const sf::String& str);//инициализация вывода сообщения 
-    Message();
+   
    void info(const float& x, const float& y, const sf::String& str, int size, int num);
    void print(sf::RenderWindow& window) 
    {

@@ -79,10 +79,10 @@ void Bullet::map_interaction(Map &map) {//взаимодействие с картой
         for (int j = mX / 24; j < (mX + 9) / 24; ++j) {//проходим все тайлы
             char tile = map.get_tile(i, j);//получить символ тайла
 
-            if (tile == '0' || tile == '2')//если тайл "0" или "2"
+            if (tile == '0' || tile == '@')//если серый фон или бетон
                 present = false;//ничего не происходит
 
-            if (tile == '1') {//если "1"
+            if (tile == '#') {//если кирпич
                 map.break_wall(i, j);//стомать стену
                 present = false;// тайла нет
             }

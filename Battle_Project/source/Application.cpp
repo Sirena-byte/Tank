@@ -12,13 +12,9 @@ Application::Application()
     msgStart(90, 330, "Press \'Enter\' to start"), msgOver(250, 300, "Game over"),
     msgLost(260, 350, "You lost"), msgWon(265, 350, "You won"), frags(0){
 
-   
     sf::Clock clock;
 
-    packOfEnemies = new Enemy[4]{ Enemy(52,31), Enemy(147,391), Enemy(532,391), Enemy(628,31) };
-   
-   
-
+    packOfEnemies = new Enemy[4]{ Enemy(26,31), Enemy(121,391), Enemy(506,391), Enemy(602,31) };
 
     while (mWindow.isOpen()) {
         sf::Int64 time = clock.getElapsedTime().asMicroseconds();
@@ -40,10 +36,6 @@ Application::Application()
 void Application::process_events() {
     sf::Event event;
 
-    
-    
-
-
     while (mWindow.pollEvent(event)) {
         switch (event.type) {
             case sf::Event::Closed:
@@ -55,8 +47,6 @@ void Application::process_events() {
 
 void Application::update(const sf::Int64& time) {
    
-    
-
     for (int i(0); i < 4; ++i)
         if (!packOfEnemies[i].life)//если все враги мертвы
             ++frags;

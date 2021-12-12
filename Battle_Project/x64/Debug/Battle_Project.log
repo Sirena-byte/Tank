@@ -1,4 +1,1 @@
-﻿  Map.cpp
-C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Map.cpp(103,43): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Map.cpp(103,35): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-  Battle_Project.vcxproj -> C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\x64\Debug\Battle_Project.exe
+﻿  Battle_Project.vcxproj -> C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\x64\Debug\Battle_Project.exe

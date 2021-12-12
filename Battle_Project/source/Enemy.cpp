@@ -37,7 +37,7 @@ void Enemy::move(const sf::Int64 &time) {
             mDy = -mSpeed;//вниз
             break;
     }
-    if (mCollision) tank_interaction();//если столкновение 
+    if (mCollision) tank_interaction();//если столкновение с танком
     mX += mDx * time;//меняет направленрие
     mY += mDy * time;
 }
@@ -60,7 +60,7 @@ void Enemy::update(const sf::Int64 &time, Map &map, const bool &collision) {//ин
 
     mSpeed = 0.f;//скорость
     mSprite.setPosition(mX, mY);//место "рождения"
-    animate(time);//анимация рождения
+    animate(time);//анимация
     map_interaction(map);//взаимодействие с картой
 
     bullet.update(map, time, mX, mY, mDir);//инициализация пули
