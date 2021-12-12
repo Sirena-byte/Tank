@@ -3,22 +3,22 @@
 #include <SFML/Graphics/Sprite.hpp>
 class Map;
 
-class Bullet {//класс пули
+class Bullet {//РєР»Р°СЃСЃ РїСѓР»Рё
 private:
-    float mX, mY, mDx, mDy;//координаты, ускорение
-    int mDir;//направление
+    float mX, mY, mDx, mDy;//РєРѕРѕСЂРґРёРЅР°С‚С‹, СѓСЃРєРѕСЂРµРЅРёРµ
+    int mDir;//РЅР°РїСЂР°РІР»РµРЅРёРµ
 
-    sf::Texture mTexture;//текстура
+    sf::Texture mTexture;//С‚РµРєСЃС‚СѓСЂР°
 
 public:
-    bool present; //стреляем?
-    float timeBeforeShot;//время до выстрела
+    bool present; //СЃС‚СЂРµР»СЏРµРј?
+    float timeBeforeShot;//РІСЂРµРјСЏ РґРѕ РІС‹СЃС‚СЂРµР»Р°
 	sf::Sprite mSprite;
 
-    explicit Bullet(const float &x, const float &y);//непереопределяемая функция пули( параметры: координаты)
+    explicit Bullet(const float &x, const float &y);//РЅРµРїРµСЂРµРѕРїСЂРµРґРµР»СЏРµРјР°СЏ С„СѓРЅРєС†РёСЏ РїСѓР»Рё( РїР°СЂР°РјРµС‚СЂС‹: РєРѕРѕСЂРґРёРЅР°С‚С‹)
 
-	void shoot() { present = true; }//функция стрельбы
+	void shoot() { present = true; }//С„СѓРЅРєС†РёСЏ СЃС‚СЂРµР»СЊР±С‹
     void move(const sf::Int64 &time);
-    void update(Map &map, const sf::Int64 &time, float &x, const float &y, const int &dir);//инициализация пули
-    void map_interaction(Map &map);//взаимодействие с картой
+    void update(Map &map, const sf::Int64 &time, float &x, const float &y, const int &dir);//РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїСѓР»Рё
+    void map_interaction(Map &map);//РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ СЃ РєР°СЂС‚РѕР№
 };

@@ -1,4 +1,4 @@
-#include <SFML/Graphics.hpp>
+п»ї#include <SFML/Graphics.hpp>
 #include "Application.h"
 #include<sstream>
 #include<iostream>
@@ -8,9 +8,9 @@
 using namespace std;
 
 Application::Application()
-    : mWindow(sf::VideoMode(1000, 672), "Battle City"), gameOver(false), gameStarted(false),//основное окно
+    : mWindow(sf::VideoMode(1000, 672), "Battle City"), gameOver(false), gameStarted(false),//Г®Г±Г­Г®ГўГ­Г®ГҐ Г®ГЄГ­Г®
     msgStart(90, 330, "Press \'Enter\' to start"), msgOver(250, 300, "Game over"),
-    msgLost(260, 350, "You lost"), msgWon(265, 350, "You won"), frags(0){
+    msgLost(260, 350, "You lost"), msgWon(265, 350, "You won"), frags(0) {
 
     sf::Clock clock;
 
@@ -20,13 +20,13 @@ Application::Application()
         sf::Int64 time = clock.getElapsedTime().asMicroseconds();
         clock.restart();
         time /= 800;
-        
+
         process_events();
-     
+
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
             gameStarted = true;
 
-        if (gameStarted && !gameOver)//если начало и не конец
+        if (gameStarted && !gameOver)//ГҐГ±Г«ГЁ Г­Г Г·Г Г«Г® ГЁ Г­ГҐ ГЄГ®Г­ГҐГ¶
             update(time);
         render();
     }
@@ -38,17 +38,17 @@ void Application::process_events() {
 
     while (mWindow.pollEvent(event)) {
         switch (event.type) {
-            case sf::Event::Closed:
-                mWindow.close();
-                break;
+        case sf::Event::Closed:
+            mWindow.close();
+            break;
         }
     }
 }
 
 void Application::update(const sf::Int64& time) {
-   
+
     for (int i(0); i < 4; ++i)
-        if (!packOfEnemies[i].life)//если все враги мертвы
+        if (!packOfEnemies[i].life)//ГҐГ±Г«ГЁ ГўГ±ГҐ ГўГ°Г ГЈГЁ Г¬ГҐГ°ГІГўГ»
             ++frags;
         else {
             frags = 0;
@@ -57,114 +57,114 @@ void Application::update(const sf::Int64& time) {
 
     if (frags == 4)
     {
-        gameOver = true;//конец игры
-        Application::Application();//рестарт игры
+        gameOver = true;//ГЄГ®Г­ГҐГ¶ ГЁГЈГ°Г»
+        Application::Application();//Г°ГҐГ±ГІГ Г°ГІ ГЁГЈГ°Г»
     }
 
-    if (!mPlayer.life)//если мертв игрок
+    if (!mPlayer.life)//ГҐГ±Г«ГЁ Г¬ГҐГ°ГІГў ГЁГЈГ°Г®ГЄ
     {
-        gameOver = true;//конец игры
-        Application::Application();//рестарт игры
+        gameOver = true;//ГЄГ®Г­ГҐГ¶ ГЁГЈГ°Г»
+        Application::Application();//Г°ГҐГ±ГІГ Г°ГІ ГЁГЈГ°Г»
     }
-  
+
     bool collision;
     for (int i(0); i < 4; ++i) {
         collision = mPlayer.mSprite.getGlobalBounds().intersects(packOfEnemies[i].mSprite.getGlobalBounds());
         if (collision)
             break;
     }
- 
+
     if (mPlayer.life)
         mPlayer.update(time, map, collision);
 
     for (int i(0); i < 4; ++i) {
-        if (packOfEnemies[i].life) {//если есть в наличии враги
-            packOfEnemies[i].update(time, map, collision);//инициализируем врага
+        if (packOfEnemies[i].life) {//ГҐГ±Г«ГЁ ГҐГ±ГІГј Гў Г­Г Г«ГЁГ·ГЁГЁ ГўГ°Г ГЈГЁ
+            packOfEnemies[i].update(time, map, collision);//ГЁГ­ГЁГ¶ГЁГ Г«ГЁГ§ГЁГ°ГіГҐГ¬ ГўГ°Г ГЈГ 
 
             if (packOfEnemies[i].bullet.mSprite.getGlobalBounds().intersects(mPlayer.mSprite.getGlobalBounds())
                 && packOfEnemies[i].bullet.present) {
                 mPlayer.collapse();
-                packOfEnemies[i].bullet.present = false;//если пуля врага пересечется с игроком, то пуля мертва
+                packOfEnemies[i].bullet.present = false;//ГҐГ±Г«ГЁ ГЇГіГ«Гї ГўГ°Г ГЈГ  ГЇГҐГ°ГҐГ±ГҐГ·ГҐГІГ±Гї Г± ГЁГЈГ°Г®ГЄГ®Г¬, ГІГ® ГЇГіГ«Гї Г¬ГҐГ°ГІГўГ 
             }
 
             if (packOfEnemies[i].bullet.mSprite.getGlobalBounds().intersects(mBase.mSprite.getGlobalBounds())
                 && packOfEnemies[i].bullet.present) {
-                mBase.life = false;//если пуля попадет в штаб, то штаб мертв
-                gameOver = true;//игра окончена
+                mBase.life = false;//ГҐГ±Г«ГЁ ГЇГіГ«Гї ГЇГ®ГЇГ Г¤ГҐГІ Гў ГёГІГ ГЎ, ГІГ® ГёГІГ ГЎ Г¬ГҐГ°ГІГў
+                gameOver = true;//ГЁГЈГ°Г  Г®ГЄГ®Г­Г·ГҐГ­Г 
             }
-            if (mPlayer.bullet.mSprite.getGlobalBounds().intersects(packOfEnemies[i].mSprite.getGlobalBounds())//если пуля игрока попадет во врага
+            if (mPlayer.bullet.mSprite.getGlobalBounds().intersects(packOfEnemies[i].mSprite.getGlobalBounds())//ГҐГ±Г«ГЁ ГЇГіГ«Гї ГЁГЈГ°Г®ГЄГ  ГЇГ®ГЇГ Г¤ГҐГІ ГўГ® ГўГ°Г ГЈГ 
                 && mPlayer.bullet.present) {
-                packOfEnemies[i].collapse();//минус один враг
-                mPlayer.playerScore += 200;//добавляем очки
+                packOfEnemies[i].collapse();//Г¬ГЁГ­ГіГ± Г®Г¤ГЁГ­ ГўГ°Г ГЈ
+                mPlayer.playerScore += 200;//Г¤Г®ГЎГ ГўГ«ГїГҐГ¬ Г®Г·ГЄГЁ
                 cout << mPlayer.playerScore << endl;////////////////////////
-                mPlayer.bullet.present = false;//пуля мертва
+                mPlayer.bullet.present = false;//ГЇГіГ«Гї Г¬ГҐГ°ГІГўГ 
             }
         }
     }
 
-    if (mPlayer.bullet.mSprite.getGlobalBounds().intersects(mBase.mSprite.getGlobalBounds())//если пуля игрока попадет в штаб
+    if (mPlayer.bullet.mSprite.getGlobalBounds().intersects(mBase.mSprite.getGlobalBounds())//ГҐГ±Г«ГЁ ГЇГіГ«Гї ГЁГЈГ°Г®ГЄГ  ГЇГ®ГЇГ Г¤ГҐГІ Гў ГёГІГ ГЎ
         && mPlayer.bullet.present) {
-        mBase.life = false;//база мертва
-        gameOver = true;//конец игры
+        mBase.life = false;//ГЎГ Г§Г  Г¬ГҐГ°ГІГўГ 
+        gameOver = true;//ГЄГ®Г­ГҐГ¶ ГЁГЈГ°Г»
     }
-   
+
 }
 
 
-void Application::render() {//визуализация приложения
+void Application::render() {//ГўГЁГ§ГіГ Г«ГЁГ§Г Г¶ГЁГї ГЇГ°ГЁГ«Г®Г¦ГҐГ­ГЁГї
     font.loadFromFile("media/PressStart2P.ttf");
     sf::Text text("", font, 20);
-    text.setOutlineColor(sf::Color::White);// инициализация текста в инфо колонке
+    text.setOutlineColor(sf::Color::White);// ГЁГ­ГЁГ¶ГЁГ Г«ГЁГ§Г Г¶ГЁГї ГІГҐГЄГ±ГІГ  Гў ГЁГ­ГґГ® ГЄГ®Г«Г®Г­ГЄГҐ
 
 
-    mWindow.clear();//очистка окна
+    mWindow.clear();//Г®Г·ГЁГ±ГІГЄГ  Г®ГЄГ­Г 
 
-   
 
-    map.draw(mWindow);//рисуем карту
-    if (mPlayer.life)//если игрок жив
+
+    map.draw(mWindow);//Г°ГЁГ±ГіГҐГ¬ ГЄГ Г°ГІГі
+    if (mPlayer.life)//ГҐГ±Г«ГЁ ГЁГЈГ°Г®ГЄ Г¦ГЁГў
     {
-        mWindow.draw(mPlayer.mSprite); //рисуем игрока
-      
-       
-    }
-    if (mPlayer.bullet.present) mWindow.draw(mPlayer.bullet.mSprite);//если пули есть- рисуем пули
-   
-    
-    for (int i(0); i < 4; ++i) {//цикл от 0 до 4
-      
-                if (packOfEnemies[i].bullet.present)// если у врагов есть пули
-                    mWindow.draw(packOfEnemies[i].bullet.mSprite);//то рисуем пули
+        mWindow.draw(mPlayer.mSprite); //Г°ГЁГ±ГіГҐГ¬ ГЁГЈГ°Г®ГЄГ 
 
-                if (packOfEnemies[i].life)//если враг жив
-                    mWindow.draw(packOfEnemies[i].mSprite);//рисуем врага
-    }
-    
-    
-    
-  
 
-    if (mBase.life)//если база жива
-        mWindow.draw(mBase.mSprite);//рисуем базу
+    }
+    if (mPlayer.bullet.present) mWindow.draw(mPlayer.bullet.mSprite);//ГҐГ±Г«ГЁ ГЇГіГ«ГЁ ГҐГ±ГІГј- Г°ГЁГ±ГіГҐГ¬ ГЇГіГ«ГЁ
+
+
+    for (int i(0); i < 4; ++i) {//Г¶ГЁГЄГ« Г®ГІ 0 Г¤Г® 4
+
+        if (packOfEnemies[i].bullet.present)// ГҐГ±Г«ГЁ Гі ГўГ°Г ГЈГ®Гў ГҐГ±ГІГј ГЇГіГ«ГЁ
+            mWindow.draw(packOfEnemies[i].bullet.mSprite);//ГІГ® Г°ГЁГ±ГіГҐГ¬ ГЇГіГ«ГЁ
+
+        if (packOfEnemies[i].life)//ГҐГ±Г«ГЁ ГўГ°Г ГЈ Г¦ГЁГў
+            mWindow.draw(packOfEnemies[i].mSprite);//Г°ГЁГ±ГіГҐГ¬ ГўГ°Г ГЈГ 
+    }
+
+
+
+
+
+    if (mBase.life)//ГҐГ±Г«ГЁ ГЎГ Г§Г  Г¦ГЁГўГ 
+        mWindow.draw(mBase.mSprite);//Г°ГЁГ±ГіГҐГ¬ ГЎГ Г§Гі
 
     if (!gameStarted)
-        msgStart.print(mWindow);//окно о запуске игры
+        msgStart.print(mWindow);//Г®ГЄГ­Г® Г® Г§Г ГЇГіГ±ГЄГҐ ГЁГЈГ°Г»
 
-    if (gameOver) {//если конец игры
-        msgOver.print(mWindow);//тоже какое-то окно
-        if (!mBase.life || !mPlayer.life)//если база мертва или мертв игрок
+    if (gameOver) {//ГҐГ±Г«ГЁ ГЄГ®Г­ГҐГ¶ ГЁГЈГ°Г»
+        msgOver.print(mWindow);//ГІГ®Г¦ГҐ ГЄГ ГЄГ®ГҐ-ГІГ® Г®ГЄГ­Г®
+        if (!mBase.life || !mPlayer.life)//ГҐГ±Г«ГЁ ГЎГ Г§Г  Г¬ГҐГ°ГІГўГ  ГЁГ«ГЁ Г¬ГҐГ°ГІГў ГЁГЈГ°Г®ГЄ
 
             msgLost.print(mWindow);
         else
             msgWon.print(mWindow);
     }
 
-   
+
     std::ostringstream info;
     info << mPlayer.playerScore;
     text.setString("score: " + info.str());
     text.setPosition(750, 30);
     mWindow.draw(text);
 
-    mWindow.display();//отрисовка окна
+    mWindow.display();//Г®ГІГ°ГЁГ±Г®ГўГЄГ  Г®ГЄГ­Г 
 }

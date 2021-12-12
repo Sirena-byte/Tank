@@ -4,11 +4,11 @@
 
 class Base : private sf::NonCopyable {
 private:
-    sf::Texture mTexture;//текстура
+    sf::Texture mTexture;//С‚РµРєСЃС‚СѓСЂР°
 
 public:
-    sf::Sprite mSprite;//спрайт
-    bool life;//жизнь
+    sf::Sprite mSprite;//СЃРїСЂР°Р№С‚
+    bool life;//Р¶РёР·РЅСЊ
 
     Base();
 };

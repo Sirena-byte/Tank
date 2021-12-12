@@ -1,2 +1,6 @@
 ﻿  Application.cpp
+  Main.cpp
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Main.cpp(4,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Player.cpp
+  Создание кода...
   Battle_Project.vcxproj -> C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\x64\Debug\Battle_Project.exe

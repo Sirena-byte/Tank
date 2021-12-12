@@ -5,18 +5,18 @@
 #include"Player.h"
 class Message {
 private:
-    float mX, mY;//координаты окна
+    float mX, mY;//РєРѕРѕСЂРґРёРЅР°С‚С‹ РѕРєРЅР°
     std::ostringstream mData;
-    sf::Font mFont;//класс шрифта
-    sf::Text mStr;//текстовая строка
+    sf::Font mFont;//РєР»Р°СЃСЃ С€СЂРёС„С‚Р°
+    sf::Text mStr;//С‚РµРєСЃС‚РѕРІР°СЏ СЃС‚СЂРѕРєР°
     
 public:
-    Message(const float& x, const float& y, const sf::String& str);//инициализация вывода сообщения 
+    Message(const float& x, const float& y, const sf::String& str);//РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РІС‹РІРѕРґР° СЃРѕРѕР±С‰РµРЅРёСЏ 
    
    void info(const float& x, const float& y, const sf::String& str, int size, int num);
    void print(sf::RenderWindow& window) 
    {
        window.draw(mStr); 
-   }//функция печати
+   }//С„СѓРЅРєС†РёСЏ РїРµС‡Р°С‚Рё
  
 };

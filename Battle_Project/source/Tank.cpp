@@ -5,7 +5,7 @@
 Tank::Tank(const float &x, const float &y, const float &width, const float &height, const sf::String &file)
     : life(true), mX(x), mY(y), mDx(0.f), mDy(0.f), mFile(file), mDir(0), mCollision(false),
     mCurrentFrame(0.f), mSpeed(0.f), mWidth(width), mHeight(height), 
-    bullet(x, y) {//координаты пули
+    bullet(x, y) {//РєРѕРѕСЂРґРёРЅР°С‚С‹ РїСѓР»Рё
 
     mTexture.loadFromFile(mFile);
     mSprite.setTexture(mTexture);
@@ -13,36 +13,36 @@ Tank::Tank(const float &x, const float &y, const float &width, const float &heig
     mSprite.setPosition(x, y);
 }
 
-void Tank::animate(const sf::Int64 &time) {//функция анимации танка
+void Tank::animate(const sf::Int64 &time) {//С„СѓРЅРєС†РёВ¤ Р°РЅРёРјР°С†РёРё С‚Р°РЅРєР°
     mCurrentFrame += 0.005f * time;
-    if (mCurrentFrame >= 2)//если текущий кадр больше либо равно 2
-        mCurrentFrame -= 2;//то возвращаемся в начало
+    if (mCurrentFrame >= 2)//РµСЃР»Рё С‚РµРєСѓС‰РёР№ РєР°РґСЂ Р±РѕР»СЊС€Рµ Р»РёР±Рѕ СЂР°РІРЅРѕ 2
+        mCurrentFrame -= 2;//С‚Рѕ РІРѕР·РІСЂР°С‰Р°РµРјСЃВ¤ РІ РЅР°С‡Р°Р»Рѕ
 
     if (mDx > 0.f)
-        mSprite.setTextureRect(sf::IntRect(0 + 39 * (int)mCurrentFrame, 0, 39, 39));//едем вправо
+        mSprite.setTextureRect(sf::IntRect(0 + 39 * (int)mCurrentFrame, 0, 39, 39));//РµРґРµРј РІРїСЂР°РІРѕ
     if (mDx < 0.f)
-        mSprite.setTextureRect(sf::IntRect(78 + 39 * (int)mCurrentFrame, 0, 39, 39));//влево
+        mSprite.setTextureRect(sf::IntRect(78 + 39 * (int)mCurrentFrame, 0, 39, 39));//РІР»РµРІРѕ
     if (mDy > 0.0f)
-        mSprite.setTextureRect(sf::IntRect(0 + 39 * (int)mCurrentFrame, 39, 39, 39));//вверх
+        mSprite.setTextureRect(sf::IntRect(0 + 39 * (int)mCurrentFrame, 39, 39, 39));//РІРІРµСЂС…
     if (mDy < 0.0f)
-        mSprite.setTextureRect(sf::IntRect(78 + 39 * (int)mCurrentFrame, 39, 39, 39));//вниз
+        mSprite.setTextureRect(sf::IntRect(78 + 39 * (int)mCurrentFrame, 39, 39, 39));//РІРЅРёР·
 }
 
-void Tank::collapse() {//в танк попала пуля
+void Tank::collapse() {//РІ С‚Р°РЅРє РїРѕРїР°Р»Р° РїСѓР»В¤
 
-    life = false;//танк мертв
-    bullet.present = false;//пуля мертва
-    mSprite.setPosition(0, 0);//танк в начала
+    life = false;//С‚Р°РЅРє РјРµСЂС‚РІ
+    bullet.present = false;//РїСѓР»В¤ РјРµСЂС‚РІР°
+    mSprite.setPosition(0, 0);//С‚Р°РЅРє РІ РЅР°С‡Р°Р»Р°
 }
 
-void Tank::map_interaction(Map &map) {//взаимодействие с картой
+void Tank::map_interaction(Map &map) {//РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ СЃ РєР°СЂС‚РѕР№
     for (int i = mY / 24; i < (mY + mHeight) / 24; ++i)
         for (int j = mX / 24; j < (mX + mWidth) / 24; ++j) {
             char tile = map.get_tile(i, j);
 
-            if (tile >= '0' && tile <= '@'||tile=='#') {//если символ серый фон или бетон
-                if (mDy > 0.f)//если едем вверх
-                    mY = i * 24 - mHeight;//не знаю точно что это( наверное, обновление координаты У)
+            if (tile >= '0' && tile <= '@'||tile=='#') {//РµСЃР»Рё СЃРёРјРІРѕР» СЃРµСЂС‹Р№ С„РѕРЅ РёР»Рё Р±РµС‚РѕРЅ
+                if (mDy > 0.f)//РµСЃР»Рё РµРґРµРј РІРІРµСЂС…
+                    mY = i * 24 - mHeight;//РЅРµ Р·РЅР°СЋ С‚РѕС‡РЅРѕ С‡С‚Рѕ СЌС‚Рѕ( РЅР°РІРµСЂРЅРѕРµ, РѕР±РЅРѕРІР»РµРЅРёРµ РєРѕРѕСЂРґРёРЅР°С‚С‹ вЂќ)
 
                 if (mDy < 0.f)
                     mY = (float)i * 24 + 24;
@@ -57,7 +57,7 @@ void Tank::map_interaction(Map &map) {//взаимодействие с картой
 
 }
 
-void Tank::tank_interaction() {//взаимодействие с танком
+void Tank::tank_interaction() {//РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ СЃ С‚Р°РЅРєРѕРј
     if (mDy > 0.f)
         mY -= 0.3f;
 

@@ -4,13 +4,13 @@
 
 
 Message::Message(const float& x, const float& y, const sf::String& str)
-    : mX(x), mY(y) {//инициализируем окно
+    : mX(x), mY(y) {//РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РѕРєРЅРѕ
 
-    mFont.loadFromFile("media/PressStart2P.ttf");//загружаем шрифты
-    mStr.setFont(mFont);//отправляем шрифт в строку
-    mStr.setString(str);//отправляем строку
-    mStr.setPosition(mX, mY);//устанавливаем координаты
-    mStr.setCharacterSize(25);//установить размер символов
+    mFont.loadFromFile("media/PressStart2P.ttf");//Р·Р°РіСЂСѓР¶Р°РµРј С€СЂРёС„С‚С‹
+    mStr.setFont(mFont);//РѕС‚РїСЂР°РІР»СЏРµРј С€СЂРёС„С‚ РІ СЃС‚СЂРѕРєСѓ
+    mStr.setString(str);//РѕС‚РїСЂР°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ
+    mStr.setPosition(mX, mY);//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РєРѕРѕСЂРґРёРЅР°С‚С‹
+    mStr.setCharacterSize(25);//СѓСЃС‚Р°РЅРѕРІРёС‚СЊ СЂР°Р·РјРµСЂ СЃРёРјРІРѕР»РѕРІ
 }
 
 
@@ -19,11 +19,11 @@ void Message::info(const float& x, const float& y, const sf::String& str, int si
 
     mX = x; mY = y;
      mData << num;
-     mFont.loadFromFile("media/PressStart2P.ttf");//загружаем шрифты
-     mStr.setFont(mFont);//отправляем шрифт в строку
-     mStr.setString(str + mData.str());//отправляем строку
-     mStr.setPosition(mX, mY);//устанавливаем координаты
-     mStr.setCharacterSize(15);//установить размер символов
+     mFont.loadFromFile("media/PressStart2P.ttf");//Р·Р°РіСЂСѓР¶Р°РµРј С€СЂРёС„С‚С‹
+     mStr.setFont(mFont);//РѕС‚РїСЂР°РІР»СЏРµРј С€СЂРёС„С‚ РІ СЃС‚СЂРѕРєСѓ
+     mStr.setString(str + mData.str());//РѕС‚РїСЂР°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ
+     mStr.setPosition(mX, mY);//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РєРѕРѕСЂРґРёРЅР°С‚С‹
+     mStr.setCharacterSize(15);//СѓСЃС‚Р°РЅРѕРІРёС‚СЊ СЂР°Р·РјРµСЂ СЃРёРјРІРѕР»РѕРІ
      mData << num;
  }
 

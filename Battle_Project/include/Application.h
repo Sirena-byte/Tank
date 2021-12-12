@@ -9,29 +9,29 @@
 
 class Application : private sf::NonCopyable {
 private:
-    bool gameOver;//конец игры
-    bool gameStarted;//начало
+    bool gameOver;//ГЄГ®Г­ГҐГ¶ ГЁГЈГ°Г»
+    bool gameStarted;//Г­Г Г·Г Г«Г®
     int level;
 
-    int frags;//считает убитых врагов
+    int frags;//Г±Г·ГЁГІГ ГҐГІ ГіГЎГЁГІГ»Гµ ГўГ°Г ГЈГ®Гў
    // int score;
     sf::RenderWindow mWindow;
     sf::Font font;
     sf::Text text;
-   
+
 
 
 
     Base mBase;
     Map map;
     Player mPlayer;
-    Enemy *packOfEnemies;
- 
-    //функции вывода сообщений
-    Message msgStart;//старт
-    Message msgOver;//конец
+    Enemy* packOfEnemies;
+
+    //ГґГіГ­ГЄГ¶ГЁГЁ ГўГ»ГўГ®Г¤Г  Г±Г®Г®ГЎГ№ГҐГ­ГЁГ©
+    Message msgStart;//Г±ГІГ Г°ГІ
+    Message msgOver;//ГЄГ®Г­ГҐГ¶
     Message msgLost;
-    Message msgWon;//победа
+    Message msgWon;//ГЇГ®ГЎГҐГ¤Г 
 public:
     Application();
 

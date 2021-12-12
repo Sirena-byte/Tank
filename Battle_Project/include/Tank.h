@@ -8,26 +8,26 @@ class Map;
 
 class Tank : private sf::NonCopyable  {
 protected:
-    float mX, mY, mWidth, mHeight, mDx, mDy, mSpeed;//координаты ч,у, ширина, высота, ускорение по х, у, скорость
-    int mDir;//направление
-    float mCurrentFrame;//текущий кадр
-    bool mCollision;//столкновение
+    float mX, mY, mWidth, mHeight, mDx, mDy, mSpeed;//РєРѕРѕСЂРґРёРЅР°С‚С‹ С‡,Сѓ, С€РёСЂРёРЅР°, РІС‹СЃРѕС‚Р°, СѓСЃРєРѕСЂРµРЅРёРµ РїРѕ С…, Сѓ, СЃРєРѕСЂРѕСЃС‚СЊ
+    int mDir;//РЅР°РїСЂР°РІР»РµРЅРёРµ
+    float mCurrentFrame;//С‚РµРєСѓС‰РёР№ РєР°РґСЂ
+    bool mCollision;//СЃС‚РѕР»РєРЅРѕРІРµРЅРёРµ
 
-    sf::String mFile;//файл
-    sf::Texture mTexture;//текстура
+    sf::String mFile;//С„Р°Р№Р»
+    sf::Texture mTexture;//С‚РµРєСЃС‚СѓСЂР°
 
 public:
-    explicit Tank(const float &x, const float &y, const float &width, const float &height, const sf::String &file);//явный конструктор(защищает от переопределения типов: int в float и тд)
+    explicit Tank(const float &x, const float &y, const float &width, const float &height, const sf::String &file);//СЏРІРЅС‹Р№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ(Р·Р°С‰РёС‰Р°РµС‚ РѕС‚ РїРµСЂРµРѕРїСЂРµРґРµР»РµРЅРёСЏ С‚РёРїРѕРІ: int РІ float Рё С‚Рґ)
 
-    bool life;//жизнь
+    bool life;//Р¶РёР·РЅСЊ
 
-	Bullet bullet;//класс пули
-    sf::Sprite mSprite;//спрайт 
+	Bullet bullet;//РєР»Р°СЃСЃ РїСѓР»Рё
+    sf::Sprite mSprite;//СЃРїСЂР°Р№С‚ 
 
-    void animate(const sf::Int64 &time);//функция анимации
+    void animate(const sf::Int64 &time);//С„СѓРЅРєС†РёСЏ Р°РЅРёРјР°С†РёРё
 
-    void collapse();//функция попадиния
-    virtual void move(const sf::Int64 &time) {}//переопределяемая функция движения
-    void map_interaction(Map &map);//взаимодействие с картой
-    void tank_interaction();//взаимодействие с танком
+    void collapse();//С„СѓРЅРєС†РёСЏ РїРѕРїР°РґРёРЅРёСЏ
+    virtual void move(const sf::Int64 &time) {}//РїРµСЂРµРѕРїСЂРµРґРµР»СЏРµРјР°СЏ С„СѓРЅРєС†РёСЏ РґРІРёР¶РµРЅРёСЏ
+    void map_interaction(Map &map);//РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ СЃ РєР°СЂС‚РѕР№
+    void tank_interaction();//РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ СЃ С‚Р°РЅРєРѕРј
 };

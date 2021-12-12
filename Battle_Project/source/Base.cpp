@@ -2,8 +2,8 @@
 
 Base::Base()
     : life(true) {
-    mTexture.loadFromFile("media/baseSprite.png");//загружаем текстуру
+    mTexture.loadFromFile("media/baseSprite.png");//Р·Р°РіСЂСѓР¶Р°РµРј С‚РµРєСЃС‚СѓСЂСѓ
     mSprite.setTexture(mTexture);//
-    mSprite.setTextureRect(sf::IntRect(0, 0, 48, 48));//загружаем картинку
-    mSprite.setPosition(310, 600);//определяем позицию
+    mSprite.setTextureRect(sf::IntRect(0, 0, 48, 48));//Р·Р°РіСЂСѓР¶Р°РµРј РєР°СЂС‚РёРЅРєСѓ
+    mSprite.setPosition(310, 600);//РѕРїСЂРµРґРµР»СЏРµРј РїРѕР·РёС†РёСЋ
 }

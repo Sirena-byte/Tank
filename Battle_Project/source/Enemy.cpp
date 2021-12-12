@@ -8,61 +8,61 @@ Enemy::Enemy(const float &x, const float &y)
 }
 
 void Enemy::move(const sf::Int64 &time) {
-    mSpeed = 0.1f;//скорость
-    timeBeforeMoving += time;//таймер
+    mSpeed = 0.1f;//СЃРєРѕСЂРѕСЃС‚СЊ
+    timeBeforeMoving += time;//С‚Р°Р№РјРµСЂ
 
-    if (timeBeforeMoving > 1000 + rand() % 501) {//отрезок времени
-        mDir = rand() % 4;//рандомно выбирается направление
-        timeBeforeMoving = 0.f;//обновляется переменная времени
+    if (timeBeforeMoving > 1000 + rand() % 501) {//РѕС‚СЂРµР·РѕРє РІСЂРµРјРµРЅРё
+        mDir = rand() % 4;//СЂР°РЅРґРѕРјРЅРѕ РІС‹Р±РёСЂР°РµС‚СЃСЏ РЅР°РїСЂР°РІР»РµРЅРёРµ
+        timeBeforeMoving = 0.f;//РѕР±РЅРѕРІР»СЏРµС‚СЃСЏ РїРµСЂРµРјРµРЅРЅР°СЏ РІСЂРµРјРµРЅРё
     }
 
-    switch (mDir) {//направление
+    switch (mDir) {//РЅР°РїСЂР°РІР»РµРЅРёРµ
         case 0:
-            mDx = mSpeed;//вправо
+            mDx = mSpeed;//РІРїСЂР°РІРѕ
             mDy = 0;
             break;
 
         case 1:
-            mDx = -mSpeed;//влево
+            mDx = -mSpeed;//РІР»РµРІРѕ
             mDy = 0;
             break;
 
         case 2:
             mDx = 0;
-            mDy = mSpeed;//вверх
+            mDy = mSpeed;//РІРІРµСЂС…
             break;
 
         case 3:
             mDx = 0;
-            mDy = -mSpeed;//вниз
+            mDy = -mSpeed;//РІРЅРёР·
             break;
     }
-    if (mCollision) tank_interaction();//если столкновение с танком
-    mX += mDx * time;//меняет направленрие
+    if (mCollision) tank_interaction();//РµСЃР»Рё СЃС‚РѕР»РєРЅРѕРІРµРЅРёРµ СЃ С‚Р°РЅРєРѕРј
+    mX += mDx * time;//РјРµРЅСЏРµС‚ РЅР°РїСЂР°РІР»РµРЅСЂРёРµ
     mY += mDy * time;
 }
 
 void Enemy::shoot(const float &time) {
-    timeBeforeShot += time;//время между пулями
+    timeBeforeShot += time;//РІСЂРµРјСЏ РјРµР¶РґСѓ РїСѓР»СЏРјРё
 
     if (timeBeforeShot > 2000.f) {
         if (!bullet.present)
             if (rand() % 2)
-                bullet.present = true;//стреляет
+                bullet.present = true;//СЃС‚СЂРµР»СЏРµС‚
 
         timeBeforeShot = 0.f;
     }
 }
 
-void Enemy::update(const sf::Int64 &time, Map &map, const bool &collision) {//инициализация врага
+void Enemy::update(const sf::Int64 &time, Map &map, const bool &collision) {//РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РІСЂР°РіР°
     mCollision = collision;
     move(time);
 
-    mSpeed = 0.f;//скорость
-    mSprite.setPosition(mX, mY);//место "рождения"
-    animate(time);//анимация
-    map_interaction(map);//взаимодействие с картой
+    mSpeed = 0.f;//СЃРєРѕСЂРѕСЃС‚СЊ
+    mSprite.setPosition(mX, mY);//РјРµСЃС‚Рѕ "СЂРѕР¶РґРµРЅРёСЏ"
+    animate(time);//Р°РЅРёРјР°С†РёСЏ
+    map_interaction(map);//РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ СЃ РєР°СЂС‚РѕР№
 
-    bullet.update(map, time, mX, mY, mDir);//инициализация пули
-    shoot(time);//стрельба
+    bullet.update(map, time, mX, mY, mDir);//РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїСѓР»Рё
+    shoot(time);//СЃС‚СЂРµР»СЊР±Р°
 }

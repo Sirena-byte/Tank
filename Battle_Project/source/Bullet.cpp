@@ -4,54 +4,54 @@
 Bullet::Bullet(const float &x, const float &y)
     : present(false), mX(x), mY(y), mDir(0), mDx(0.f), mDy(0.f), timeBeforeShot(0.f) {
 
-    mTexture.loadFromFile("media/bulletSprite.png");//загружаем текстуру
+    mTexture.loadFromFile("media/bulletSprite.png");//Р·Р°РіСЂСѓР¶Р°РµРј С‚РµРєСЃС‚СѓСЂСѓ
     mSprite.setTexture(mTexture);
-    mSprite.setTextureRect(sf::IntRect(0, 0, 9, 12));//получаем картинку
-    mSprite.setPosition(x, y);//устанавливаем позицию
+    mSprite.setTextureRect(sf::IntRect(0, 0, 9, 12));//РїРѕР»СѓС‡Р°РµРј РєР°СЂС‚РёРЅРєСѓ
+    mSprite.setPosition(x, y);//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїРѕР·РёС†РёСЋ
 }
 
-void Bullet::move(const sf::Int64 &time) {//функция движения пули
-    switch (mDir) {//направление
+void Bullet::move(const sf::Int64 &time) {//С„СѓРЅРєС†РёВ¤ РґРІРёР¶РµРЅРёВ¤ РїСѓР»Рё
+    switch (mDir) {//РЅР°РїСЂР°РІР»РµРЅРёРµ
         case 0:
-            mDx = 0.3f;//вправо
+            mDx = 0.3f;//РІРїСЂР°РІРѕ
             mDy = 0;
-			mSprite.setRotation(90.f);//спрайт поворачиваем на 90 градусов
+			mSprite.setRotation(90.f);//СЃРїСЂР°Р№С‚ РїРѕРІРѕСЂР°С‡РёРІР°РµРј РЅР° 90 РіСЂР°РґСѓСЃРѕРІ
             break;
 
         case 1:
-            mDx = -0.3f;//влево
+            mDx = -0.3f;//РІР»РµРІРѕ
             mDy = 0;
 			mSprite.setRotation(-90.f);
             break;
 
         case 2:
             mDx = 0;
-            mDy = 0.3f;//вверх
+            mDy = 0.3f;//РІРІРµСЂС…
 			mSprite.setRotation(180.f);
             break;
 
         case 3:
             mDx = 0;
-            mDy = -0.3f;//вниз
+            mDy = -0.3f;//РІРЅРёР·
 			mSprite.setRotation(0.f);
             break;
     }
 
-    mX += mDx * time;//?? задаем движение по иксу??
-    mY += mDy * time;// то же по игрику
-	mSprite.setPosition(mX, mY);//устанавливаем позицию
+    mX += mDx * time;//?? Р·Р°РґР°РµРј РґРІРёР¶РµРЅРёРµ РїРѕ РёРєСЃСѓ??
+    mY += mDy * time;// С‚Рѕ Р¶Рµ РїРѕ РёРіСЂРёРєСѓ
+	mSprite.setPosition(mX, mY);//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїРѕР·РёС†РёСЋ
 }
 
-void Bullet::update(Map &map, const sf::Int64 &time, float &x, const float &y, const int &dir) {//инициализация пули
+void Bullet::update(Map &map, const sf::Int64 &time, float &x, const float &y, const int &dir) {//РёРЅРёС†РёР°Р»РёР·Р°С†РёВ¤ РїСѓР»Рё
     if (present) {
-        move(time);//если пуля движется
-        map_interaction(map);//взаимодействует с картой
+        move(time);//РµСЃР»Рё РїСѓР»В¤ РґРІРёР¶РµС‚СЃВ¤
+        map_interaction(map);//РІР·Р°РёРјРѕРґРµР№СЃС‚РІСѓРµС‚ СЃ РєР°СЂС‚РѕР№
     }
     else {
-		mDir = dir;//определяем направление
+		mDir = dir;//РѕРїСЂРµРґРµР»В¤РµРј РЅР°РїСЂР°РІР»РµРЅРёРµ
         switch (mDir) {
         case 0:
-            mX = x + 35.f;//пока не знаю, что это
+            mX = x + 35.f;//РїРѕРєР° РЅРµ Р·РЅР°СЋ, С‡С‚Рѕ СЌС‚Рѕ
             mY = y + 15.f;
             break;
 
@@ -70,21 +70,21 @@ void Bullet::update(Map &map, const sf::Int64 &time, float &x, const float &y, c
             mY = y + 5.f;
             break;
         }
-		mSprite.setPosition(mX, mY);//задаем позицию
+		mSprite.setPosition(mX, mY);//Р·Р°РґР°РµРј РїРѕР·РёС†РёСЋ
     }
 }
 
-void Bullet::map_interaction(Map &map) {//взаимодействие с картой
+void Bullet::map_interaction(Map &map) {//РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ СЃ РєР°СЂС‚РѕР№
     for (int i = mY / 24; i < (mY + 12) / 24; ++i)
-        for (int j = mX / 24; j < (mX + 9) / 24; ++j) {//проходим все тайлы
-            char tile = map.get_tile(i, j);//получить символ тайла
+        for (int j = mX / 24; j < (mX + 9) / 24; ++j) {//РїСЂРѕС…РѕРґРёРј РІСЃРµ С‚Р°Р№Р»С‹
+            char tile = map.get_tile(i, j);//РїРѕР»СѓС‡РёС‚СЊ СЃРёРјРІРѕР» С‚Р°Р№Р»Р°
 
-            if (tile == '0' || tile == '@')//если серый фон или бетон
-                present = false;//ничего не происходит
+            if (tile == '0' || tile == '@')//РµСЃР»Рё СЃРµСЂС‹Р№ С„РѕРЅ РёР»Рё Р±РµС‚РѕРЅ
+                present = false;//РЅРёС‡РµРіРѕ РЅРµ РїСЂРѕРёСЃС…РѕРґРёС‚
 
-            if (tile == '#') {//если кирпич
-                map.break_wall(i, j);//стомать стену
-                present = false;// тайла нет
+            if (tile == '#') {//РµСЃР»Рё РєРёСЂРїРёС‡
+                map.break_wall(i, j);//СЃС‚РѕРјР°С‚СЊ СЃС‚РµРЅСѓ
+                present = false;// С‚Р°Р№Р»Р° РЅРµС‚
             }
         }
 }

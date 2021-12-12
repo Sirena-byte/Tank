@@ -3,14 +3,14 @@
 
 class Enemy : public Tank {
 private:
-    float timeBeforeMoving;//время до переезда
-    float timeBeforeShot;//время до стрельбы
+    float timeBeforeMoving;//РІСЂРµРјСЏ РґРѕ РїРµСЂРµРµР·РґР°
+    float timeBeforeShot;//РІСЂРµРјСЏ РґРѕ СЃС‚СЂРµР»СЊР±С‹
 
 public:
-    Enemy(const float &x, const float &y);//координаты
+    Enemy(const float &x, const float &y);//РєРѕРѕСЂРґРёРЅР°С‚С‹
     Enemy(const Enemy &copy) : Enemy(copy.mX, copy.mY){}
 
-    void move(const sf::Int64 &time);//движение
-    void shoot(const float &time);//стрельба
-    void update(const sf::Int64 &time, Map &map, const bool &collision);//обновление
+    void move(const sf::Int64 &time);//РґРІРёР¶РµРЅРёРµ
+    void shoot(const float &time);//СЃС‚СЂРµР»СЊР±Р°
+    void update(const sf::Int64 &time, Map &map, const bool &collision);//РѕР±РЅРѕРІР»РµРЅРёРµ
 };

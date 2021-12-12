@@ -8,7 +8,7 @@ using namespace std;
 
 
 Player::Player()
-    : Tank(244, 600, 39, 39, "media/playerSprites.png") {//инициализация игрока
+    : Tank(244, 600, 39, 39, "media/playerSprites.png") {//РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РёРіСЂРѕРєР°
     playerScore = 0;
 }
 
@@ -35,26 +35,26 @@ void Player::move(const sf::Int64& time) {
 
     switch (mDir) {
     case 0:
-        mDx = mSpeed;//направление вправо
+        mDx = mSpeed;//РЅР°РїСЂР°РІР»РµРЅРёРµ РІРїСЂР°РІРѕ
         mDy = 0;
         break;
 
     case 1:
-        mDx = -mSpeed;//влево
+        mDx = -mSpeed;//РІР»РµРІРѕ
         mDy = 0;
         break;
 
     case 2:
         mDx = 0;
-        mDy = mSpeed;//вверх;
+        mDy = mSpeed;//РІРІРµСЂС…;
             break;
 
     case 3:
         mDx = 0;
-        mDy = -mSpeed;//вниз
+        mDy = -mSpeed;//РІРЅРёР·
         break;
     }
-    if (mCollision) tank_interaction();//если столкновение с танком
+    if (mCollision) tank_interaction();//РµСЃР»Рё СЃС‚РѕР»РєРЅРѕРІРµРЅРёРµ СЃ С‚Р°РЅРєРѕРј
     mX += mDx * time;
     mY += mDy * time;
 }
@@ -63,18 +63,18 @@ void Player::update(const sf::Int64& time, Map& map, const bool& collision) {
     mCollision = collision;
     move(time);
 
-    mSpeed = 0.f;//скорость
-    mSprite.setPosition(mX, mY);//начальная позиция
-    animate(time);//анимация
-    map_interaction(map);//взаимодействие с картой
+    mSpeed = 0.f;//СЃРєРѕСЂРѕСЃС‚СЊ
+    mSprite.setPosition(mX, mY);//РЅР°С‡Р°Р»СЊРЅР°СЏ РїРѕР·РёС†РёСЏ
+    animate(time);//Р°РЅРёРјР°С†РёСЏ
+    map_interaction(map);//РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ СЃ РєР°СЂС‚РѕР№
 
-    bullet.update(map, time, mX, mY, mDir);//инициализация пули
-    if (!bullet.present)//если не стреляем
-        if (Keyboard::isKeyPressed(Keyboard::Space)) {//если нажат пробел
+    bullet.update(map, time, mX, mY, mDir);//РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїСѓР»Рё
+    if (!bullet.present)//РµСЃР»Рё РЅРµ СЃС‚СЂРµР»СЏРµРј
+        if (Keyboard::isKeyPressed(Keyboard::Space)) {//РµСЃР»Рё РЅР°Р¶Р°С‚ РїСЂРѕР±РµР»
             bullet.timeBeforeShot += time;
-            if (bullet.timeBeforeShot > 10.f) {//задержка между пулями
-                bullet.present = true;//стреляем
-                bullet.timeBeforeShot = 0.f;//перезаряжаем))
+            if (bullet.timeBeforeShot > 10.f) {//Р·Р°РґРµСЂР¶РєР° РјРµР¶РґСѓ РїСѓР»СЏРјРё
+                bullet.present = true;//СЃС‚СЂРµР»СЏРµРј
+                bullet.timeBeforeShot = 0.f;//РїРµСЂРµР·Р°СЂСЏР¶Р°РµРј))
             }
         }
 }

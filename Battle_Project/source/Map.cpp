@@ -50,12 +50,12 @@ Map::Map()
     int level = 1;
     std::ostringstream mData;
     mData << level;
-    string str1 = ".txt";//конец строки
-    string str2 = "levels/";//начало строки
+    string str1 = ".txt";//РєРѕРЅРµС† СЃС‚СЂРѕРєРё
+    string str2 = "levels/";//РЅР°С‡Р°Р»Рѕ СЃС‚СЂРѕРєРё
     string theMyString = (str2 + mData.str() + ".txt");
     ifstream file{ theMyString };
    
-    if (!file.is_open()) cout << "Ошибка открытия файла!" << endl;
+    if (!file.is_open()) cout << "СњС€РёР±РєР° РѕС‚РєСЂС‹С‚РёВ¤ С„Р°Р№Р»Р°!" << endl;
 
     TileMap = new sf::String[HEIGHT_MAP];
     vector<string>value;
@@ -79,12 +79,12 @@ Map::Map()
 }
 
 
-void Map::draw(sf::RenderWindow& window) {//функция отрисовки карты
+void Map::draw(sf::RenderWindow& window) {//С„СѓРЅРєС†РёВ¤ РѕС‚СЂРёСЃРѕРІРєРё РєР°СЂС‚С‹
     for (int i(0); i < HEIGHT_MAP; i++)
-        for (int j(0); j < WIDTH_MAP; j++) {//проходим по всей карте
+        for (int j(0); j < WIDTH_MAP; j++) {//РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµР№ РєР°СЂС‚Рµ
             switch (TileMap[i][j]) {
             case '.':
-                mSprite.setTextureRect(sf::IntRect(0, 0, 24, 24));//рисуем тайлы
+                mSprite.setTextureRect(sf::IntRect(0, 0, 24, 24));//СЂРёСЃСѓРµРј С‚Р°Р№Р»С‹
                 break;
 
             case '0':
@@ -100,8 +100,8 @@ void Map::draw(sf::RenderWindow& window) {//функция отрисовки карты
                 break;
             }
 
-            mSprite.setPosition(j * 24, i * 24);//устанавливаем позиции
-            window.draw(mSprite);//рисуем карту
+            mSprite.setPosition(j * 24, i * 24);//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїРѕР·РёС†РёРё
+            window.draw(mSprite);//СЂРёСЃСѓРµРј РєР°СЂС‚Сѓ
         }
 }
 
