@@ -6,6 +6,7 @@
 #include "Base.h"
 #include "Message.h"
 #include<sstream>
+#include"bonus.h"
 
 class Application : private sf::NonCopyable {
 private:
@@ -23,6 +24,8 @@ private:
     Map map;
     Player mPlayer;
     Enemy* packOfEnemies;
+    Bonus mBonus;
+
 public:
     Application();
    

@@ -15,7 +15,7 @@ protected:
 
     sf::String mFile;//файл
     sf::Texture mTexture;//текстура
-
+    
 public:
     explicit Tank(const float &x, const float &y, const float &width, const float &height, const sf::String &file);//явный конструктор(защищает от переопределения типов: int в float и тд)
 

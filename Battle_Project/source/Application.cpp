@@ -2,6 +2,7 @@
 #include "Application.h"
 #include<sstream>
 #include<iostream>
+#include"bonus.h"
 
 using namespace std;
 
@@ -11,26 +12,29 @@ Application::Application()
      msgLost(260, 350, "You lost"), msgWon(),*/
     frags(0)
 {
+   
     initialize();
 }
 void Application::initialize()
 {
     sf::Clock clock;
-
-    packOfEnemies = new Enemy[4]{ Enemy(26,31), Enemy(121,391), Enemy(506,391), Enemy(602,31) };
+   
+    packOfEnemies = new Enemy[4]{ Enemy(26,31), Enemy(121,391), Enemy(506,391), Enemy(602,31) };//инициализируем врагов
 
     while (mWindow.isOpen()) {
         sf::Int64 time = clock.getElapsedTime().asMicroseconds();
         clock.restart();
         time /= 800;
-
+  
         process_events();
 
         //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))// старт при нажатии ентер
             gameStarted = true;
+           // mBonus.bonusChois();
 
         if (gameStarted && !gameOver)
             update(time);
+       
         render();
     }
 }
@@ -55,7 +59,7 @@ void Application::update(const sf::Int64& time)
 
     for (int i(0); i < 4; ++i)
         if (!packOfEnemies[i].life)
-            ++frags;
+            ++frags;//если враг убит, то флаг++
         else
         {
             frags = 0;
@@ -69,7 +73,7 @@ void Application::update(const sf::Int64& time)
         initialize();
     }
 
-    if (!mPlayer.life)
+    if (!mPlayer.life)//если игрок мертв, то конец игры
     {
         gameOver = true;
 
@@ -103,14 +107,18 @@ void Application::update(const sf::Int64& time)
             if (packOfEnemies[i].bullet.mSprite.getGlobalBounds().intersects(mBase.mSprite.getGlobalBounds())
                 && packOfEnemies[i].bullet.present)
             {
-                mBase.life = false;
-                gameOver = true;
+                mBase.life = false;//база мертва
+                gameOver = true;//конец игры
             }
             if (mPlayer.bullet.mSprite.getGlobalBounds().intersects(packOfEnemies[i].mSprite.getGlobalBounds())
                 && mPlayer.bullet.present)
             {
                 packOfEnemies[i].collapse();
                 mPlayer.playerScore += 200;
+                if (mPlayer.playerScore == 1400)
+                {
+                    cout << "stop" << endl;
+                }
                 cout << mPlayer.playerScore << endl;
                 mPlayer.bullet.present = false;
             }

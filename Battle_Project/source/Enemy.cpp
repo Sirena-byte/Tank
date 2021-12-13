@@ -1,5 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include"Enemy.h"
+#include"bonus.h"
+#include<iostream>
+
+using namespace std;
 
 
 Enemy::Enemy(const float &x, const float &y)
@@ -14,7 +18,13 @@ void Enemy::move(const sf::Int64 &time) {
     if (timeBeforeMoving > 1000 + rand() % 501) {//отрезок времени
         mDir = rand() % 4;//рандомно выбирается направление
         timeBeforeMoving = 0.f;//обновляется переменная времени
+       //mBonus.randomeGenerate(7);//////////////////////////////////////////////////////////////////////
+       
+        
     }
+
+    mBonus.TimerBonus(time);//появление бонусов...............................................................
+
 
     switch (mDir) {//направление
         case 0:

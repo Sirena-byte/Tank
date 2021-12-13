@@ -9,6 +9,7 @@ public:
     void move(const sf::Int64 &time);
     void update(const sf::Int64 &time, Map &map, const bool &collision);
     int playerScore;
+    int playerLife;
     int level;
     
 };

@@ -3,6 +3,7 @@
 #include<iostream>
 #include<sstream>
 
+
 using namespace std;
 
 
@@ -20,7 +21,9 @@ Map::Map()
     if (!file.is_open()) cout << "ќшибка открыти¤ файла!" << endl;
 
     TileMap = new sf::String[HEIGHT_MAP];
-    vector<string>value;
+   
+    vector<string> value;
+    //vector<string>().swap(value);
     string s;
 
     while (file >> s)
@@ -30,10 +33,12 @@ Map::Map()
     }
     for (int i = 0; i < HEIGHT_MAP; i++)
     {
-        cout << value[i] << endl;
+       
         TileMap[i] = value[i];
+        cout << value[i] << endl;
     }
-    file.close();
+    
+    
 
     mTexture.loadFromFile("media/groundSprites.png");
     mTexture.setSmooth(true);
@@ -66,12 +71,19 @@ void Map::levelMap()
         cout << value[i] << endl;
         TileMap[i] = value[i];
     }
+    
     file.close();
+    system("cls");
+   
 
     mTexture.loadFromFile("media/groundSprites.png");
     mTexture.setSmooth(true);
     mSprite.setTexture(mTexture);
    level++;
+   if (level >3)
+   {
+       level = 1;
+   }
 }
 
 void Map::draw(sf::RenderWindow& window) {//функци¤ отрисовки карты
@@ -104,3 +116,5 @@ void Map::draw(sf::RenderWindow& window) {//функци¤ отрисовки к
 void Map::break_wall(const int& i, const int& j) {
     TileMap[i][j] = '.';
 }
+
+

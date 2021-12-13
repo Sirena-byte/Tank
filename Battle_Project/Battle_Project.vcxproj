@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="source\Application.cpp" />
     <ClCompile Include="source\Base.cpp" />
+    <ClCompile Include="source\bonus.cpp" />
     <ClCompile Include="source\Bullet.cpp" />
     <ClCompile Include="source\Enemy.cpp" />
     <ClCompile Include="source\Main.cpp" />
@@ -32,12 +33,14 @@
   <ItemGroup>
     <ClInclude Include="include\Application.h" />
     <ClInclude Include="include\Base.h" />
+    <ClInclude Include="include\bonus.h" />
     <ClInclude Include="include\Bullet.h" />
     <ClInclude Include="include\Enemy.h" />
     <ClInclude Include="include\Map.h" />
     <ClInclude Include="include\Message.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\Tank.h" />
+    <ClInclude Include="source\bonus.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

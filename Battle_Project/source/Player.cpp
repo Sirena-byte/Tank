@@ -8,8 +8,8 @@ using namespace std;
 
 Player::Player()
     : Tank(244, 600, 39, 39, "media/playerSprites.png") {//инициализация игрока
-    playerScore = 0;
-    level = 1;
+    playerScore = 0;//очки игрока
+    playerLife = 2;
 }
 
 void Player::move(const sf::Int64& time) {
