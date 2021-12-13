@@ -7,12 +7,12 @@ using namespace std;
 
 Application::Application()
     : mWindow(sf::VideoMode(1000, 672), "Battle City"), gameOver(false), gameStarted(false),
-   /* msgStart(90, 330, "Press \'Enter\' to start"), msgOver(250, 300, "Game over"),
-    msgLost(260, 350, "You lost"), msgWon(),*/ 
+    /* msgStart(90, 330, "Press \'Enter\' to start"), msgOver(250, 300, "Game over"),
+     msgLost(260, 350, "You lost"), msgWon(),*/
     frags(0)
-    {
+{
     initialize();
-    }
+}
 void Application::initialize()
 {
     sf::Clock clock;
@@ -26,7 +26,7 @@ void Application::initialize()
 
         process_events();
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+        //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))// старт при нажатии ентер
             gameStarted = true;
 
         if (gameStarted && !gameOver)
@@ -35,13 +35,13 @@ void Application::initialize()
     }
 }
 
-void Application::process_events() 
+void Application::process_events()
 {
     sf::Event event;
 
-    while (mWindow.pollEvent(event)) 
+    while (mWindow.pollEvent(event))
     {
-        switch (event.type) 
+        switch (event.type)
         {
         case sf::Event::Closed:
             mWindow.close();
@@ -50,13 +50,13 @@ void Application::process_events()
     }
 }
 
-void Application::update(const sf::Int64& time) 
+void Application::update(const sf::Int64& time)
 {
 
     for (int i(0); i < 4; ++i)
         if (!packOfEnemies[i].life)
             ++frags;
-        else 
+        else
         {
             frags = 0;
             break;
@@ -64,19 +64,20 @@ void Application::update(const sf::Int64& time)
 
     if (frags == 4)
     {
-        gameOver = true;
+        //gameOver = true;
+        map.levelMap();
         initialize();
     }
 
     if (!mPlayer.life)
     {
         gameOver = true;
-      
+
         initialize();
     }
 
     bool collision;
-    for (int i(0); i < 4; ++i) 
+    for (int i(0); i < 4; ++i)
     {
         collision = mPlayer.mSprite.getGlobalBounds().intersects(packOfEnemies[i].mSprite.getGlobalBounds());
         if (collision)
@@ -86,14 +87,14 @@ void Application::update(const sf::Int64& time)
     if (mPlayer.life)
         mPlayer.update(time, map, collision);
 
-    for (int i(0); i < 4; ++i) 
+    for (int i(0); i < 4; ++i)
     {
-        if (packOfEnemies[i].life) 
+        if (packOfEnemies[i].life)
         {
             packOfEnemies[i].update(time, map, collision);
 
             if (packOfEnemies[i].bullet.mSprite.getGlobalBounds().intersects(mPlayer.mSprite.getGlobalBounds())
-                && packOfEnemies[i].bullet.present) 
+                && packOfEnemies[i].bullet.present)
             {
                 mPlayer.collapse();
                 packOfEnemies[i].bullet.present = false;
@@ -106,7 +107,7 @@ void Application::update(const sf::Int64& time)
                 gameOver = true;
             }
             if (mPlayer.bullet.mSprite.getGlobalBounds().intersects(packOfEnemies[i].mSprite.getGlobalBounds())
-                && mPlayer.bullet.present) 
+                && mPlayer.bullet.present)
             {
                 packOfEnemies[i].collapse();
                 mPlayer.playerScore += 200;
@@ -139,7 +140,7 @@ void Application::render() //отрисовка
 
     if (mPlayer.life)//если игрок жив- рисуем игрока
     {
-        mWindow.draw(mPlayer.mSprite); 
+        mWindow.draw(mPlayer.mSprite);
     }
 
     if (mPlayer.bullet.present)//рисуем пули
@@ -164,13 +165,14 @@ void Application::render() //отрисовка
     }
 
     if (!gameStarted)
-    {
+    {/*
         text.setString("Press \'Enter\' to start");//выводим очки игрока
-        text.setPosition(90,330);
+        text.setPosition(90, 330);
         mWindow.draw(text);
+        */
     }
-     
-    if (gameOver) 
+
+    if (gameOver)
     {
         text.setString("Game over");//выводим очки игрока
         text.setPosition(250, 300);
@@ -178,7 +180,7 @@ void Application::render() //отрисовка
 
         if (!mBase.life || !mPlayer.life)
         {
-             
+
             text.setString("You lost");//выводим очки игрока
             text.setPosition(260, 350);
             mWindow.draw(text);

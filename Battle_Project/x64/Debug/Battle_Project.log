@@ -1,2 +1,25 @@
 ﻿  Application.cpp
+  Bullet.cpp
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Bullet.cpp(78,16): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Bullet.cpp(79,20): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+  Main.cpp
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Main.cpp(5,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Map.cpp
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Map.cpp(98,43): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Map.cpp(98,35): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+  Player.cpp
+  Tank.cpp
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Tank.cpp(12,56): warning C4244: аргумент: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Tank.cpp(12,48): warning C4244: аргумент: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Tank.cpp(39,16): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Tank.cpp(40,20): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+  Создание кода...
   Battle_Project.vcxproj -> C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\x64\Debug\Battle_Project.exe

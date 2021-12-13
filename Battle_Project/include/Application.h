@@ -11,7 +11,7 @@ class Application : private sf::NonCopyable {
 private:
     bool gameOver;
     bool gameStarted;
-    int level;
+  
 
     int frags;
    // int score;
@@ -19,21 +19,13 @@ private:
     sf::Font font;
     sf::Text text;
 
-
-
-
     Base mBase;
     Map map;
     Player mPlayer;
     Enemy* packOfEnemies;
-
-   
-    //Message msgStart;
-   // Message msgOver;
-   // Message msgLost;
-   // Message msgWon;
 public:
     Application();
+   
     void initialize();
     void process_events();
     void update(const sf::Int64& time);
