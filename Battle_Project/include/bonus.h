@@ -7,22 +7,24 @@ private:
 	Clock clock;
 	Clock gameTimerClock;
 
-	int gameTime;//0
-	int createObjectForMap;//0
-	int randomElementX;
-	int randomElementY;
-	int countBonus;
-
+	//int gameTime;//игровое время
+	int createObjectForMap;//переменная таймера
+	int randomElementX;//рандомная координата по х
+	int randomElementY;//рандомная координата по у
+	int countBonus;//количество бонусов
+	int bonus;
 	
-	Image image;
-	Texture texture;
-	Sprite sprite;
+	
 
-
+	sf::Texture mTexture;
+	sf::Sprite mSprite;
+	sf::RenderWindow window;
+	sf::Int64 time;
 	public:
 		Bonus();
-		void randomeGenerate(const sf::Int64& time);
-		void TimerBonus(const sf::Int64& time);
+		void randomeGenerate();//генерация координат
+		void TimerBonus();//функция таймер
+		void BonusDraw();//отрисовка бонусов
 	
 
 	

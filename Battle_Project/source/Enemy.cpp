@@ -22,9 +22,7 @@ void Enemy::move(const sf::Int64 &time) {
        
         
     }
-
-    mBonus.TimerBonus(time);//появление бонусов...............................................................
-
+  
 
     switch (mDir) {//направление
         case 0:
@@ -61,6 +59,7 @@ void Enemy::shoot(const float &time) {
                 bullet.present = true;//стреляет
 
         timeBeforeShot = 0.f;
+        mBonus.TimerBonus();
     }
 }
 

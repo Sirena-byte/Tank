@@ -27,10 +27,11 @@ void Application::initialize()
         time /= 800;
   
         process_events();
+        
 
-        //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))// старт при нажатии ентер
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))// старт при нажатии ентер
             gameStarted = true;
-           // mBonus.bonusChois();
+        
 
         if (gameStarted && !gameOver)
             update(time);
@@ -75,9 +76,14 @@ void Application::update(const sf::Int64& time)
 
     if (!mPlayer.life)//если игрок мертв, то конец игры
     {
-        gameOver = true;
-
-        initialize();
+        //gameOver = true;
+        gameOver = false; gameStarted = false;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))// старт при нажатии ентер
+        {
+            gameStarted = true;
+            initialize();
+           
+        }
     }
 
     bool collision;
@@ -109,17 +115,21 @@ void Application::update(const sf::Int64& time)
             {
                 mBase.life = false;//база мертва
                 gameOver = true;//конец игры
+
             }
             if (mPlayer.bullet.mSprite.getGlobalBounds().intersects(packOfEnemies[i].mSprite.getGlobalBounds())
                 && mPlayer.bullet.present)
             {
                 packOfEnemies[i].collapse();
                 mPlayer.playerScore += 200;
-                if (mPlayer.playerScore == 1400)
+                if (mPlayer.playerScore > mPlayer.recordPoints)//если текущие очки больше рекордных, 
                 {
-                    cout << "stop" << endl;
+                    mPlayer.recordPoints = mPlayer.playerScore;//то рекорд=текущие
+                    cout << mPlayer.playerScore << endl;
+                    cout << mPlayer.recordPoints << endl;
                 }
-                cout << mPlayer.playerScore << endl;
+                
+               
                 mPlayer.bullet.present = false;
             }
         }
@@ -149,6 +159,8 @@ void Application::render() //отрисовка
     if (mPlayer.life)//если игрок жив- рисуем игрока
     {
         mWindow.draw(mPlayer.mSprite);
+       // mBonus.TimerBonus();//появление бонусов...............................................................
+       
     }
 
     if (mPlayer.bullet.present)//рисуем пули

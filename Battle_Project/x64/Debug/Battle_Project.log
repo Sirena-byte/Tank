@@ -1,4 +1,2 @@
-﻿  bonus.cpp
-C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\bonus.cpp(37,28): warning C4244: +=: преобразование "const sf::Int64" в "int", возможна потеря данных
-C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\bonus.cpp(41,24): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+﻿  Application.cpp
   Battle_Project.vcxproj -> C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\x64\Debug\Battle_Project.exe
