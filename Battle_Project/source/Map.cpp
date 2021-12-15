@@ -29,13 +29,13 @@ Map::Map()
     while (file >> s)
     {
         value.push_back(s);
-        cout << s << endl;
+       // cout << s << endl;
     }
     for (int i = 0; i < HEIGHT_MAP; i++)
     {
        
         TileMap[i] = value[i];
-        cout << value[i] << endl;
+       // cout << value[i] << endl;
     }
     
     
@@ -64,11 +64,11 @@ void Map::levelMap()
     while (file >> s)
     {
         value.push_back(s);
-        cout << s << endl;
+        //cout << s << endl;
     }
     for (int i = 0; i < HEIGHT_MAP; i++)
     {
-        cout << value[i] << endl;
+       // cout << value[i] << endl;
         TileMap[i] = value[i];
     }
     

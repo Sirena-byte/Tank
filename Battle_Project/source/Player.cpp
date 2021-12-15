@@ -2,13 +2,20 @@
 #include "Player.h"
 #include <Map.h>
 #include"Application.h"
+#include<fstream>
 #include<iostream>
 using sf::Keyboard;
 using namespace std;
 
 Player::Player()
     : Tank(244, 600, 39, 39, "media/playerSprites.png") {//инициализация игрока
+
+
     playerScore = 0;//очки игрока
+    recordPointLast = 0;
+    //record(10, 0);
+    temp = 0;
+
 
     playerLife = 1;
 }
@@ -79,3 +86,38 @@ void Player::update(const sf::Int64& time, Map& map, const bool& collision) {
             }
         }
 }
+
+/*
+void Player::fillingRecordVector()//заполняем вектор
+{
+   
+        //record.push_back(temp);
+        sort(record.begin(), record.end(), std::greater<int>());//сортируем вектор по убыванию
+        temp = 0;
+        show_vector(record);//выводит вектор на экран
+        writingToFile( record);//записываем в файл
+       
+}
+void show_vector(vector<int>& a)//вывод вектора на экран
+{
+    for (vector<int>::iterator it = a.begin(); it != a.end(); ++it)
+        cout << *it;
+}
+
+void writingToFile(vector<int>& a)
+{
+    std::ofstream out;          // поток для записи
+    out.open("test.txt"); // окрываем файл для записи
+    if (out.is_open())
+    {
+        for (vector<int>::iterator it = a.begin(); it != a.end(); ++it)
+        {
+            out << *it;
+        }
+    }
+
+    std::cout << "End of program" << std::endl;
+}
+
+*/
+

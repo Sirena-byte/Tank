@@ -1,25 +1,25 @@
 ////////////////////////////////////////////////////////////
 //
-// SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2018 Laurent Gomila (laurent@sfml-dev.org)
+// 
+//SFML - простая и быстрая мультимедийная библиотека
+// Copyright (C) 2007-2018 Лоран Гомила (laurent@sfml-dev.org)
 //
-// This software is provided 'as-is', without any express or implied warranty.
-// In no event will the authors be held liable for any damages arising from the use of this software.
+// Это программное обеспечение предоставляется «как есть», без каких-либо явных или подразумеваемых гарантий.
+// Ни в коем случае авторы не несут ответственности за любой ущерб, возникший в результате использования этого программного обеспечения.
 //
-// Permission is granted to anyone to use this software for any purpose,
-// including commercial applications, and to alter it and redistribute it freely,
-// subject to the following restrictions:
+// Всем предоставляется разрешение на использование этого программного обеспечения для любых целей,
+// включая коммерческие приложения, а также свободно изменять и распространять его,
+// со следующими ограничениями:
 //
-// 1. The origin of this software must not be misrepresented;
-//    you must not claim that you wrote the original software.
-//    If you use this software in a product, an acknowledgment
-//    in the product documentation would be appreciated but is not required.
+// 1. Не допускается искажение информации о происхождении этого программного обеспечения;
+// вы не должны утверждать, что написали оригинальное программное обеспечение.
+// Если вы используете это программное обеспечение в продукте, подтверждение
+// в документации по продукту приветствуется, но не является обязательным.
 //
-// 2. Altered source versions must be plainly marked as such,
-//    and must not be misrepresented as being the original software.
+// 2. Измененные исходные версии должны быть четко обозначены как таковые,
+// и не должны быть искажены как оригинальное программное обеспечение.
 //
-// 3. This notice may not be removed or altered from any source distribution.
-//
+// 3. Это примечание не может быть удалено или изменено из любого исходного дистрибутива.
 ////////////////////////////////////////////////////////////
 
 
@@ -75,9 +75,9 @@ height(static_cast<T>(rectangle.height))
 template <typename T>
 bool Rect<T>::contains(T x, T y) const
 {
-    // Rectangles with negative dimensions are allowed, so we must handle them correctly
+    // Допускаются прямоугольники с отрицательными размерами, поэтому мы должны правильно с ними обращаться
 
-    // Compute the real min and max of the rectangle on both axes
+    // Вычисляем реальный минимум и максимум прямоугольника по обеим осям
     T minX = std::min(left, static_cast<T>(left + width));
     T maxX = std::max(left, static_cast<T>(left + width));
     T minY = std::min(top, static_cast<T>(top + height));
@@ -108,27 +108,27 @@ bool Rect<T>::intersects(const Rect<T>& rectangle) const
 template <typename T>
 bool Rect<T>::intersects(const Rect<T>& rectangle, Rect<T>& intersection) const
 {
-    // Rectangles with negative dimensions are allowed, so we must handle them correctly
+    // Допускаются прямоугольники с отрицательными размерами, поэтому мы должны правильно с ними обращаться
 
-    // Compute the min and max of the first rectangle on both axes
+    // Вычисление минимума и максимума первого прямоугольника по обеим осям
     T r1MinX = std::min(left, static_cast<T>(left + width));
     T r1MaxX = std::max(left, static_cast<T>(left + width));
     T r1MinY = std::min(top, static_cast<T>(top + height));
     T r1MaxY = std::max(top, static_cast<T>(top + height));
 
-    // Compute the min and max of the second rectangle on both axes
+    // Вычислите минимум и максимум второго прямоугольника по обеим осям.
     T r2MinX = std::min(rectangle.left, static_cast<T>(rectangle.left + rectangle.width));
     T r2MaxX = std::max(rectangle.left, static_cast<T>(rectangle.left + rectangle.width));
     T r2MinY = std::min(rectangle.top, static_cast<T>(rectangle.top + rectangle.height));
     T r2MaxY = std::max(rectangle.top, static_cast<T>(rectangle.top + rectangle.height));
 
-    // Compute the intersection boundaries
+    // Вычислить границы пересечения
     T interLeft   = std::max(r1MinX, r2MinX);
     T interTop    = std::max(r1MinY, r2MinY);
     T interRight  = std::min(r1MaxX, r2MaxX);
     T interBottom = std::min(r1MaxY, r2MaxY);
 
-    // If the intersection is valid (positive non zero area), then there is an intersection
+    // Если пересечение действительное (положительная ненулевая площадь), то есть пересечение.
     if ((interLeft < interRight) && (interTop < interBottom))
     {
         intersection = Rect<T>(interLeft, interTop, interRight - interLeft, interBottom - interTop);

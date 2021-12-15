@@ -3,6 +3,7 @@
 #include<sstream>
 #include<iostream>
 #include"bonus.h"
+#include"menu.h"
 
 using namespace std;
 
@@ -12,7 +13,7 @@ Application::Application()
      msgLost(260, 350, "You lost"), msgWon(),*/
     frags(0)
 {
-   
+    menu(mWindow);//вызов меню
     initialize();
 }
 void Application::initialize()
@@ -29,8 +30,8 @@ void Application::initialize()
         process_events();
         
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))// старт при нажатии ентер
-            gameStarted = true;
+       // if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))// старт при нажатии ентер
+           gameStarted = true;
         
 
         if (gameStarted && !gameOver)
@@ -82,7 +83,7 @@ void Application::update(const sf::Int64& time)
         {
             gameStarted = true;
             initialize();
-           
+
         }
     }
 
@@ -122,14 +123,9 @@ void Application::update(const sf::Int64& time)
             {
                 packOfEnemies[i].collapse();
                 mPlayer.playerScore += 200;
-                if (mPlayer.playerScore > mPlayer.recordPoints)//если текущие очки больше рекордных, 
-                {
-                    mPlayer.recordPoints = mPlayer.playerScore;//то рекорд=текущие
-                    cout << mPlayer.playerScore << endl;
-                    cout << mPlayer.recordPoints << endl;
-                }
                 
-               
+
+
                 mPlayer.bullet.present = false;
             }
         }
@@ -138,11 +134,13 @@ void Application::update(const sf::Int64& time)
     if (mPlayer.bullet.mSprite.getGlobalBounds().intersects(mBase.mSprite.getGlobalBounds())
         && mPlayer.bullet.present)
     {
-        mBase.life = false;
+       mBase.life = false;
         gameOver = true;
     }
 
 }
+
+
 
 
 void Application::render() //отрисовка

@@ -33,4 +33,5 @@ public:
     void process_events();
     void update(const sf::Int64& time);
     void render();
+    void sort();
 };
