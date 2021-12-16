@@ -1,3 +1,8 @@
-﻿  Enemy.cpp
-C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Enemy.cpp(76,11): warning C4244: аргумент: преобразование "const sf::Int64" в "const float", возможна потеря данных
+﻿  Application.cpp
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\include\Info.h(64,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\include\Info.h(75,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\include\Info.h(85,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\include\Info.h(108,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Application.cpp(262,27): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Application.cpp(270,35): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
   Battle_Project.vcxproj -> C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Debug\Battle_Project.exe

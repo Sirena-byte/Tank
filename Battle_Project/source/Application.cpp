@@ -158,6 +158,7 @@ void Application::update(const sf::Int64& time)
         recordStatistics(temp);
        mBase.life = false;
         gameOver = true;
+        initialize();
     }
 
 }
@@ -172,12 +173,7 @@ void Application::render() //отрисовка
     sf::Text text("", font, 20);
     text.setOutlineColor(sf::Color::White);
     std::ostringstream info,info2;
-    //............................................................................................................
-    //font.loadFromFile("media/PressStart2P.ttf");//сохраненные очки
-    //sf::Text tex1("", font, 20);
-    //text1.setOutlineColor(sf::Color::White);
-    //std::ostringstream info2;
-
+   
 //...................................................................................................
 
     mWindow.clear();
@@ -232,6 +228,17 @@ void Application::render() //отрисовка
             text.setString("You lost");
             text.setPosition(260, 350);
             mWindow.draw(text);
+
+            text.setString("Press \'Enter\' to start");
+            text.setPosition(90, 330);
+            mWindow.draw(text);
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))// старт при нажатии ентер
+            {
+                gameOver = false;
+                gameStarted = true;
+                mWindow.close();
+                Application();
+            }
         }
         else
         {
@@ -239,6 +246,7 @@ void Application::render() //отрисовка
             text.setPosition(265, 350);
             mWindow.draw(text);
         }
+        
     }
     //.................................................................................................................................
 
@@ -247,7 +255,7 @@ void Application::render() //отрисовка
     text.setPosition(750, 30);
     mWindow.draw(text);
     info.str(" ");
-//.................................вывод таблицы рекордов...................................
+    //.................................вывод таблицы рекордов...................................
    
     int num = 1;
     int  y = 300;
@@ -256,7 +264,7 @@ void Application::render() //отрисовка
             int sum = vec[i];
             
         
-            info <<setw(3)<<num;
+            info <<setw(2)<<num;
             info2 << sum;
             text.setString(info.str() + " : " + info2.str());
             text.setPosition(750, y);
