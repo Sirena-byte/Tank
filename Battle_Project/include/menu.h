@@ -5,15 +5,16 @@ using namespace sf;
 
 
 void menu(RenderWindow& window) {
-	Texture menuTexture1, menuTexture2, menuTexture3, aboutTexture, menuBackground;
+	Texture menuTexture1, menuTexture2, menuTexture3, constructionTexture, menuBackground;
 	menuTexture1.loadFromFile("media/start_menu3.png");
 	menuTexture2.loadFromFile("media/construction_menu.png");
 	menuTexture3.loadFromFile("media/exit_menu.png");
-	aboutTexture.loadFromFile("media/Penguins.jpg");
+	constructionTexture.loadFromFile("media/Penguins.jpg");
 	menuBackground.loadFromFile("media/start3_3.png");//фоновая картинка меню
-	Sprite menu1(menuTexture1), menu2(menuTexture2), menu3(menuTexture3), about(aboutTexture), menuBg(menuBackground);
+	Sprite menu1(menuTexture1), menu2(menuTexture2), menu3(menuTexture3),construction(constructionTexture), menuBg(menuBackground);
 	bool isMenu = 1;
 	int menuNum = 0;
+	//позиция
 	menu1.setPosition(419, 300);
 	menu2.setPosition(280, 400);
 	menu3.setPosition(429, 500);
@@ -35,7 +36,7 @@ void menu(RenderWindow& window) {
 		if (Mouse::isButtonPressed(Mouse::Left))
 		{
 			if (menuNum == 1) isMenu = false;//если нажали первую кнопку, то выходим из меню 
-			if (menuNum == 2) { window.draw(about); window.display(); while (!Keyboard::isKeyPressed(Keyboard::Escape)); }
+			if (menuNum == 2) { window.draw(construction); window.display(); while (!Keyboard::isKeyPressed(Keyboard::Escape)); }
 			if (menuNum == 3) { window.close(); isMenu = false; }
 
 		}

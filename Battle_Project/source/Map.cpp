@@ -22,8 +22,7 @@ Map::Map()
 
     TileMap = new sf::String[HEIGHT_MAP];
    
-    vector<string> value;
-    //vector<string>().swap(value);
+    vector<string> value;//вектор куда счивывается карта из файла
     string s;
 
     while (file >> s)
@@ -34,7 +33,7 @@ Map::Map()
     for (int i = 0; i < HEIGHT_MAP; i++)
     {
        
-        TileMap[i] = value[i];
+        TileMap[i] = value[i];//и сохраняется 
        // cout << value[i] << endl;
     }
     
@@ -55,7 +54,7 @@ void Map::levelMap()
     string theMyString = (str2 + mData.str() + ".txt");
     ifstream file{ theMyString };
 
-    if (!file.is_open()) cout << "ќшибка открыти¤ файла!" << endl;
+    if (!file.is_open()) cout << "ошибка открытия файла!" << endl;
 
     TileMap = new sf::String[HEIGHT_MAP];
     vector<string>value;

@@ -33,7 +33,7 @@ void Message::info(const float& x, const float& y, const sf::String& str, int si
      mStr.setFont(mFont);//отправляем шрифт в строку
      mStr.setString(str + mData.str());//отправляем строку
      mStr.setPosition(mX, mY);//устанавливаем координаты
-     mStr.setCharacterSize(15);//установить размер символов
+     mStr.setCharacterSize(size);//установить размер символов
      mData << num;
  }
 

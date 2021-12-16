@@ -4,22 +4,27 @@
 #include<iostream>
 #include"bonus.h"
 #include"menu.h"
+#include<Info.h>
 
 using namespace std;
-
+int temp;//временная переменная
 Application::Application()
     : mWindow(sf::VideoMode(1000, 672), "Battle City"), gameOver(false), gameStarted(false),
     /* msgStart(90, 330, "Press \'Enter\' to start"), msgOver(250, 300, "Game over"),
      msgLost(260, 350, "You lost"), msgWon(),*/
     frags(0)
 {
+    //playerScore = 0;
+   
+  
+    read();//..........................................................................считали файл
     menu(mWindow);//вызов меню
     initialize();
+    
 }
 void Application::initialize()
 {
     sf::Clock clock;
-   
     packOfEnemies = new Enemy[4]{ Enemy(26,31), Enemy(121,391), Enemy(506,391), Enemy(602,31) };//инициализируем врагов
 
     while (mWindow.isOpen()) {
@@ -58,7 +63,7 @@ void Application::process_events()
 
 void Application::update(const sf::Int64& time)
 {
-
+    
     for (int i(0); i < 4; ++i)
         if (!packOfEnemies[i].life)
             ++frags;//если враг убит, то флаг++
@@ -71,14 +76,18 @@ void Application::update(const sf::Int64& time)
     if (frags == 4)
     {
         //gameOver = true;
+     
         map.levelMap();
         initialize();
     }
 
     if (!mPlayer.life)//если игрок мертв, то конец игры
     {
-        //gameOver = true;
-        gameOver = false; gameStarted = false;
+        recordStatistics(temp);//сравниваем очки и записываем в файл
+        gameOver = true;
+       
+
+        //gameOver = false; gameStarted = false;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))// старт при нажатии ентер
         {
             gameStarted = true;
@@ -114,6 +123,7 @@ void Application::update(const sf::Int64& time)
             if (packOfEnemies[i].bullet.mSprite.getGlobalBounds().intersects(mBase.mSprite.getGlobalBounds())
                 && packOfEnemies[i].bullet.present)
             {
+                recordStatistics(temp);
                 mBase.life = false;//база мертва
                 gameOver = true;//конец игры
 
@@ -123,9 +133,18 @@ void Application::update(const sf::Int64& time)
             {
                 packOfEnemies[i].collapse();
                 mPlayer.playerScore += 200;
-                
 
 
+               
+               
+              if (mPlayer.playerScore != 0)
+               {
+                   temp = mPlayer.playerScore;//копируем очки во врекменную переменную
+             
+               }
+              
+               
+          
                 mPlayer.bullet.present = false;
             }
         }
@@ -134,6 +153,7 @@ void Application::update(const sf::Int64& time)
     if (mPlayer.bullet.mSprite.getGlobalBounds().intersects(mBase.mSprite.getGlobalBounds())
         && mPlayer.bullet.present)
     {
+        recordStatistics(temp);
        mBase.life = false;
         gameOver = true;
     }
@@ -145,10 +165,15 @@ void Application::update(const sf::Int64& time)
 
 void Application::render() //отрисовка
 {
+    //.....................................................................................................
     font.loadFromFile("media/PressStart2P.ttf");
     sf::Text text("", font, 20);
     text.setOutlineColor(sf::Color::White);
     std::ostringstream info;
+    //............................................................................................................
+
+   
+//...................................................................................................
 
     mWindow.clear();
 
@@ -184,7 +209,7 @@ void Application::render() //отрисовка
 
     if (!gameStarted)
     {/*
-        text.setString("Press \'Enter\' to start");//выводим очки игрока
+        text.setString("Press \'Enter\' to start");
         text.setPosition(90, 330);
         mWindow.draw(text);
         */
@@ -192,29 +217,38 @@ void Application::render() //отрисовка
 
     if (gameOver)
     {
-        text.setString("Game over");//выводим очки игрока
+        text.setString("Game over");
         text.setPosition(250, 300);
         mWindow.draw(text);
 
         if (!mBase.life || !mPlayer.life)
         {
 
-            text.setString("You lost");//выводим очки игрока
+            text.setString("You lost");
             text.setPosition(260, 350);
             mWindow.draw(text);
         }
         else
         {
-            text.setString("You won");//выводим очки игрока
+            text.setString("You won");
             text.setPosition(265, 350);
             mWindow.draw(text);
         }
     }
+    //.................................................................................................................................
 
-    info << mPlayer.playerScore;
+    info <<mPlayer.playerScore;
     text.setString("score: " + info.str());//выводим очки игрока
     text.setPosition(750, 30);
     mWindow.draw(text);
-
+//............................................................................................................................
+   
+    
+    
+    
+    
+    
+    
+    
     mWindow.display();
 }

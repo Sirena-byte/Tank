@@ -11,16 +11,16 @@ public:
     void move(const sf::Int64 &time);
     void update(const sf::Int64 &time, Map &map, const bool &collision);
     //void fillingRecordVector();//запилняем вектор
-    
 
-   // vector<int>record;//вектор для хранения рекордов
+    
+    int playerScore;//текущие очки
    
 
 
     int playerLife;
     int level;
-    int playerScore;//текущие очки
-    int recordPointLast;//последний рекорд списка
-    int temp;//временная переменная 
+  public:  
+    //int recordPointLast;//последний рекорд списка
+    std::vector<int>record;//вектор для хранения рекордов
     
 };

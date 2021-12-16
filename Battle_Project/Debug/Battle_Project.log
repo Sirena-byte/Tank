@@ -1,2 +1,8 @@
 ﻿  Application.cpp
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\include\Info.h(65,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\include\Info.h(76,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\include\Info.h(86,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\include\Info.h(109,20): warning C4018: <: несоответствие типов со знаком и без знака
+  Player.cpp
+  Создание кода...
   Battle_Project.vcxproj -> C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Debug\Battle_Project.exe

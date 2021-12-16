@@ -32,6 +32,6 @@ public:
     void levelMap();
     void break_wall(const int& i, const int& j);//ломать стену
     const char get_tile(const int& i, const int& j) { return TileMap[i][j]; }// функция получения тайла
-    void draw(sf::RenderWindow& window);//рисует окно
+    void draw(sf::RenderWindow& window);//рисует 
    // void getMap();
 };

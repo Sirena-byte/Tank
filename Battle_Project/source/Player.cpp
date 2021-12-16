@@ -4,17 +4,19 @@
 #include"Application.h"
 #include<fstream>
 #include<iostream>
+
+
 using sf::Keyboard;
 using namespace std;
 
 Player::Player()
     : Tank(244, 600, 39, 39, "media/playerSprites.png") {//инициализация игрока
-
-
     playerScore = 0;//очки игрока
-    recordPointLast = 0;
-    //record(10, 0);
-    temp = 0;
+    //record.reserve(10);//зарезервировала место на 10 ячеек
+   
+  //recordPointLast = 0;
+   
+    //temp = 0;
 
 
     playerLife = 1;

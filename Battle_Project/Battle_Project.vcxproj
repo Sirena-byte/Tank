@@ -36,6 +36,7 @@
     <ClInclude Include="include\bonus.h" />
     <ClInclude Include="include\Bullet.h" />
     <ClInclude Include="include\Enemy.h" />
+    <ClInclude Include="include\Info.h" />
     <ClInclude Include="include\Map.h" />
     <ClInclude Include="include\menu.h" />
     <ClInclude Include="include\Message.h" />
