@@ -24,11 +24,12 @@ void Message::msg(const float& x, const float& y, const sf::String& str)
     mStr.setCharacterSize(25);//установить размер символов
 }
 
-void Message::info(const float& x, const float& y, const sf::String& str, int size, int num)
+void Message::info(const float& x, const float& y, const sf::String& str, int size, int num)//строка+число
  {
 
     mX = x; mY = y;
      mData << num;
+    
      mFont.loadFromFile("media/PressStart2P.ttf");//загружаем шрифты
      mStr.setFont(mFont);//отправляем шрифт в строку
      mStr.setString(str + mData.str());//отправляем строку
@@ -37,3 +38,16 @@ void Message::info(const float& x, const float& y, const sf::String& str, int si
      mData << num;
  }
 
+void Message::info2(const float& x, const float& y, int pos, const sf::String& str2, int size, int num)//строка+число+стока
+{
+
+    mX = x; mY = y;
+    mData << num;
+    mData1 << pos;
+    mFont.loadFromFile("media/PressStart2P.ttf");//загружаем шрифты
+    mStr.setFont(mFont);//отправляем шрифт в строку
+    mStr.setString(mData1.str()+ mData.str() + str2);//отправляем строку
+    mStr.setPosition(mX, mY);//устанавливаем координаты
+    mStr.setCharacterSize(size);//установить размер символов
+    mData << num;
+}

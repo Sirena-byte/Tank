@@ -15,7 +15,7 @@ void Enemy::move(const sf::Int64 &time) {
     mSpeed = 0.1f;//скорость
     timeBeforeMoving += time;//таймер
 
-    if (timeBeforeMoving > 1000 + rand() % 501) {//отрезок времени
+    if (timeBeforeMoving > 3000 + rand() % 501) {//отрезок времени
         mDir = rand() % 4;//рандомно выбирается направление
         timeBeforeMoving = 0.f;//обновляется переменная времени
        //mBonus.randomeGenerate(7);//////////////////////////////////////////////////////////////////////

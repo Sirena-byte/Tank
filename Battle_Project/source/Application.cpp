@@ -5,6 +5,8 @@
 #include"bonus.h"
 #include"menu.h"
 #include<Info.h>
+#include<iomanip>
+
 
 using namespace std;
 int temp;//временная переменная
@@ -166,13 +168,16 @@ void Application::update(const sf::Int64& time)
 void Application::render() //отрисовка
 {
     //.....................................................................................................
-    font.loadFromFile("media/PressStart2P.ttf");
+    font.loadFromFile("media/PressStart2P.ttf");//текущие очки
     sf::Text text("", font, 20);
     text.setOutlineColor(sf::Color::White);
-    std::ostringstream info;
+    std::ostringstream info,info2;
     //............................................................................................................
+    //font.loadFromFile("media/PressStart2P.ttf");//сохраненные очки
+    //sf::Text tex1("", font, 20);
+    //text1.setOutlineColor(sf::Color::White);
+    //std::ostringstream info2;
 
-   
 //...................................................................................................
 
     mWindow.clear();
@@ -241,13 +246,28 @@ void Application::render() //отрисовка
     text.setString("score: " + info.str());//выводим очки игрока
     text.setPosition(750, 30);
     mWindow.draw(text);
-//............................................................................................................................
+    info.str(" ");
+//.................................вывод таблицы рекордов...................................
    
-    
-    
-    
-    
-    
+    int num = 1;
+    int  y = 300;
+        for (int i = 0; i < vec.size(); i++)
+        {
+            int sum = vec[i];
+            
+        
+            info <<setw(3)<<num;
+            info2 << sum;
+            text.setString(info.str() + " : " + info2.str());
+            text.setPosition(750, y);
+            mWindow.draw(text);
+            y += 20;
+            info.str("");//очисчаем переменные
+            info2.str("");
+            num++;
+        }
+ //......................................................................................  
+   
     
     
     mWindow.display();

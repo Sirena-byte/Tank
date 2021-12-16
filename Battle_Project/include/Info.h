@@ -5,6 +5,7 @@
 #include<fstream>
 #include<algorithm>//для использования sort
 #include"Message.h"
+#include"Message.h"
 
 
 using namespace std;
@@ -14,41 +15,39 @@ using namespace sf;
 //RenderWindow mWindow;
 //Font font;
 //sf::Font font1, font2, font3, font4, font5, font6, font7, font8, font9, font10;
-//sf::Text text1, text2, text3, text4, text5, text6, text7, text8, text9, text10;
+Text text, text1, text2, text3, text4, text5, text6, text7, text8, text9, text10;
 
 
 vector<int>vec;
 
+sf::RenderWindow window;
 
 
-int x = 100;
-int num = 1;
 
 
-//void ff()
+//............................склейка строка+ число(для формирования text...)...............................................
+void gluing(string str,int number)
+{
+	for (int i = 0; i < 10; i++)
+	{
+		std::ostringstream playerScoreString;    // объявили переменную
+		playerScoreString << number;		//занесли в нее число очков, то есть формируем строку
+		text.setString(str + playerScoreString.str());//задаем строку тексту и вызываем сформированную выше строку методом .str() 
+	}
+}
+//...............................................................................................
+
+
+
+////.........................склейка строка+ число + строка...............................................
+//void strPlusNumPlusStr( string textNum,string str1, int number, string str2, int x, int y)
 //{
-//	font.loadFromFile("media/PressStart2P.ttf");
-//	Text text("", font, 20);
-//	text.setOutlineColor(Color::White);
-//	ostringstream infoRecord;
+//	Text textNum;
+//	std::ostringstream playerScoreString;    // объявили переменную
+//	playerScoreString << number;		//занесли в нее число очков, то есть формируем строку
+//	text.setString(str1 + playerScoreString.str()+str2);//задаем строку тексту и вызываем сформированную выше строку методом .str() 
 //}
-
-//void printInfo(int x, int y,char str,int infoRec)
-//{
-//	int y = 100;
-//	for (int i = 0; i < 10; i++)
-//	{
-//		ff();
-//		msg.info << mPlayer.playerScore;
-//		text.setString( infoRec);//выводим очки игрока
-//		text.setPosition(750, y);
-//		mWindow.draw(text);
-//		y += 20;
-//	}
-//}
-
-
-
+////.............................................................................................................
 
 
 //.................................работа с загрузкой и выгрузкой таблицы рекордов из вектора..............

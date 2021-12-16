@@ -6,7 +6,7 @@
 class Message {
 private:
     float mX, mY;//координаты окна
-    std::ostringstream mData;
+    std::ostringstream mData, mData1;
     sf::Font mFont;//класс шрифта
     sf::Text mStr;//текстовая строка
     
@@ -17,6 +17,7 @@ public:
   
    void msg(const float& x, const float& y, const sf::String& str);
    void info(const float& x, const float& y, const sf::String& str, int size, int num);
+   void info2(const float& x, const float& y, int pos, const sf::String& str2, int size, int num);
    void print(sf::RenderWindow& window) 
    {
        window.draw(mStr); 

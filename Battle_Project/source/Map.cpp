@@ -18,7 +18,7 @@ Map::Map()
     string theMyString = (str2 + mData.str() + ".txt");
     ifstream file{ theMyString };
 
-    if (!file.is_open()) cout << "ќшибка открыти¤ файла!" << endl;
+    if (!file.is_open()) cout << "ошибка открытия файла!" << endl;
 
     TileMap = new sf::String[HEIGHT_MAP];
    
@@ -85,7 +85,7 @@ void Map::levelMap()
    }
 }
 
-void Map::draw(sf::RenderWindow& window) {//функци¤ отрисовки карты
+void Map::draw(sf::RenderWindow& window) {//функция отрисовки карты
     for (int i(0); i < HEIGHT_MAP; i++)
         for (int j(0); j < WIDTH_MAP; j++) {//проходим по всей карте
             switch (TileMap[i][j]) {
