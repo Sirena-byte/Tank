@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include"Enemy.h"
-#include"bonus.h"
+//#include"bonus.h"
 #include<iostream>
 
 using namespace std;
@@ -59,7 +59,7 @@ void Enemy::shoot(const float &time) {
                 bullet.present = true;//стреляет
 
         timeBeforeShot = 0.f;
-        mBonus.TimerBonus();
+        //mBonus.TimerBonus(time);//........................................................................................bonus
     }
 }
 

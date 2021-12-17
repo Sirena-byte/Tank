@@ -2,6 +2,7 @@
 #include<fstream>
 #include<iostream>
 #include<sstream>
+#include"bonus.h"
 
 
 using namespace std;
@@ -104,8 +105,21 @@ void Map::draw(sf::RenderWindow& window) {//функция отрисовки к
             case '@':
                 mSprite.setTextureRect(sf::IntRect(48, 0, 24, 24));
                 break;
-            }
 
+            case'1':
+                mSprite.setTextureRect(sf::IntRect(96,0,24,24));
+                mSprite.setScale(2, 2);
+                break;
+
+            case'2':
+                mSprite.setTextureRect(sf::IntRect(120,0,24,24));
+                mSprite.setScale(2, 2);
+                break;
+            case '3':
+                mSprite.setTextureRect(sf::IntRect(144,0,24,24));
+                mSprite.setScale(2, 2);
+                break;
+            }
             mSprite.setPosition(j * 24, i * 24);//устанавливаем позиции
             window.draw(mSprite);//рисуем карту
         }
@@ -117,3 +131,27 @@ void Map::break_wall(const int& i, const int& j) {
 }
 
 
+void Map::randomBonusCreate()
+  {
+    int randomElemrntX = 0;
+    int randomElementY = 0;
+
+    srand(time(0));
+    int countBonus = 5;
+
+    
+        randomElemrntX = 1 + rand() % (WIDTH_MAP - 1);
+        randomElementY = 1 + rand() % (HEIGHT_MAP - 1);
+        int tmp;
+
+        if (TileMap[randomElemrntX][randomElementY] == '.' || TileMap[randomElemrntX][randomElementY] == '#')
+        {
+           /*TileMap[randomElemrntX][randomElementY]*/ tmp = rand() % 3;//рандомно выбирается тайл бонуса
+           if (/*TileMap[randomElemrntX][randomElementY]*/tmp == 0) { TileMap[randomElemrntX][randomElementY] = '1'; }
+           if (/*TileMap[randomElemrntX][randomElementY]*/tmp == 1) { TileMap[randomElemrntX][randomElementY] = '2'; }
+           if (/*TileMap[randomElemrntX][randomElementY]*/tmp == 2) { TileMap[randomElemrntX][randomElementY] = '3'; }
+
+           cout << "koordinate X= " << randomElemrntX << "\tkoordinate Y= " << randomElementY << endl;
+        }
+    
+}

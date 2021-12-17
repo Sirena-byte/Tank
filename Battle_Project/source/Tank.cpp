@@ -13,7 +13,7 @@ Tank::Tank(const float &x, const float &y, const float &width, const float &heig
     mSprite.setPosition(x, y);
 }
 
-void Tank::animate(const sf::Int64 &time) {//функци¤ анимации танка
+void Tank::animate(const sf::Int64 &time) {//функция анимации танка
     mCurrentFrame += 0.005f * time;
     if (mCurrentFrame >= 2)//если текущий кадр больше либо равно 2
         mCurrentFrame -= 2;//то возвращаемс¤ в начало
@@ -28,10 +28,10 @@ void Tank::animate(const sf::Int64 &time) {//функци¤ анимации т�
         mSprite.setTextureRect(sf::IntRect(78 + 39 * (int)mCurrentFrame, 39, 39, 39));//вниз
 }
 
-void Tank::collapse() {//в танк попала пул¤
+void Tank::collapse() {//в танк попала пуля
 
     life = false;//танк мертв
-    bullet.present = false;//пул¤ мертва
+    bullet.present = false;//пуля мертва
     mSprite.setPosition(0, 0);//танк в начала
 }
 

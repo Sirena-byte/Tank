@@ -6,7 +6,7 @@ class Enemy : public Tank {
 private:
     float timeBeforeMoving;//время до переезда
     float timeBeforeShot;//время до стрельбы
-    Bonus mBonus;
+    //Bonus mBonus;
 public:
    
     Enemy(const float &x, const float &y);//координаты

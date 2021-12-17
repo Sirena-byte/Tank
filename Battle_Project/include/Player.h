@@ -7,7 +7,7 @@
 class Player : public Tank {
 public:
     Player();
-
+    void playerPosition();
     void move(const sf::Int64 &time);
     void update(const sf::Int64 &time, Map &map, const bool &collision);
     //void fillingRecordVector();//запилняем вектор
@@ -21,6 +21,6 @@ public:
     int level;
   public:  
     //int recordPointLast;//последний рекорд списка
-    std::vector<int>record;//вектор для хранения рекордов
+    //std::vector<int>record;//вектор для хранения рекордов
     
 };

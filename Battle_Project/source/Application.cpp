@@ -2,7 +2,7 @@
 #include "Application.h"
 #include<sstream>
 #include<iostream>
-#include"bonus.h"
+//#include"bonus.h"
 #include"menu.h"
 #include<Info.h>
 #include<iomanip>
@@ -15,13 +15,14 @@ Application::Application()
     /* msgStart(90, 330, "Press \'Enter\' to start"), msgOver(250, 300, "Game over"),
      msgLost(260, 350, "You lost"), msgWon(),*/
     frags(0)
+    
 {
     //playerScore = 0;
-   
-  
+    createObjectForMapTimer = 0;
     read();//..........................................................................считали файл
     menu(mWindow);//вызов меню
     initialize();
+   
     
 }
 void Application::initialize()
@@ -36,7 +37,13 @@ void Application::initialize()
   
         process_events();
         
-
+        createObjectForMapTimer += time;
+        if (createObjectForMapTimer > 8000)
+        {
+            map.randomBonusCreate();
+            createObjectForMapTimer = 0;
+        }
+        
        // if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))// старт при нажатии ентер
            gameStarted = true;
         
@@ -80,6 +87,7 @@ void Application::update(const sf::Int64& time)
         //gameOver = true;
      
         map.levelMap();
+        mPlayer.playerPosition();
         initialize();
     }
 
@@ -183,8 +191,7 @@ void Application::render() //отрисовка
     if (mPlayer.life)//если игрок жив- рисуем игрока
     {
         mWindow.draw(mPlayer.mSprite);
-       // mBonus.TimerBonus();//появление бонусов...............................................................
-       
+      
     }
 
     if (mPlayer.bullet.present)//рисуем пули
@@ -208,13 +215,13 @@ void Application::render() //отрисовка
         mWindow.draw(mBase.mSprite);
     }
 
-    if (!gameStarted)
-    {/*
-        text.setString("Press \'Enter\' to start");
-        text.setPosition(90, 330);
-        mWindow.draw(text);
-        */
-    }
+    //if (!gameStarted)
+    //{/*
+    //    text.setString("Press \'Enter\' to start");
+    //    text.setPosition(90, 330);
+    //    mWindow.draw(text);
+    //    */
+    //}
 
     if (gameOver)
     {
@@ -229,16 +236,19 @@ void Application::render() //отрисовка
             text.setPosition(260, 350);
             mWindow.draw(text);
 
+   //...........................................................................................................
+
             text.setString("Press \'Enter\' to start");
-            text.setPosition(90, 330);
+            text.setPosition(90, 530);
             mWindow.draw(text);
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))// старт при нажатии ентер
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))// рестарт при проигрыше
             {
                 gameOver = false;
                 gameStarted = true;
                 mWindow.close();
                 Application();
             }
+  //.................................................................................................................
         }
         else
         {
@@ -256,9 +266,17 @@ void Application::render() //отрисовка
     mWindow.draw(text);
     info.str(" ");
     //.................................вывод таблицы рекордов...................................
+
+
+
+    text.setString("score table");
+    text.setPosition(750, 250);
+    mWindow.draw(text);
+    info.str(" ");
    
     int num = 1;
     int  y = 300;
+    
         for (int i = 0; i < vec.size(); i++)
         {
             int sum = vec[i];
@@ -275,8 +293,8 @@ void Application::render() //отрисовка
             num++;
         }
  //......................................................................................  
-   
-    
+        //mBonus.BonusDraw();
+        //mBonus.TimerBonus();
     
     mWindow.display();
 }

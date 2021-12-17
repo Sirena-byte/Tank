@@ -11,11 +11,7 @@
 using namespace std;
 using namespace sf;
 
-//Message msg;
-//RenderWindow mWindow;
-//Font font;
-//sf::Font font1, font2, font3, font4, font5, font6, font7, font8, font9, font10;
-Text text, text1, text2, text3, text4, text5, text6, text7, text8, text9, text10;
+Text text;
 
 
 vector<int>vec;
@@ -36,18 +32,6 @@ void gluing(string str,int number)
 	}
 }
 //...............................................................................................
-
-
-
-////.........................склейка строка+ число + строка...............................................
-//void strPlusNumPlusStr( string textNum,string str1, int number, string str2, int x, int y)
-//{
-//	Text textNum;
-//	std::ostringstream playerScoreString;    // объ€вили переменную
-//	playerScoreString << number;		//занесли в нее число очков, то есть формируем строку
-//	text.setString(str1 + playerScoreString.str()+str2);//задаем строку тексту и вызываем сформированную выше строку методом .str() 
-//}
-////.............................................................................................................
 
 
 //.................................работа с загрузкой и выгрузкой таблицы рекордов из вектора..............
@@ -71,11 +55,7 @@ void read()//чтение из файла
 	else
 		cout << "Error opening file!" << endl;
 	fin.close();
-	cout << "вектор такой" << endl;
-	for (int i = 0; i < vec.size(); i++)
-	{
-		cout << vec[i] << " ";
-	}
+	
 }
 void write()//запись в файл
 {
@@ -104,11 +84,7 @@ void recordStatistics(int temp)//передаетс€ в функцию переменна€ текущих очков
 		sort(vec.begin(), vec.end(), std::greater<int>());//сортируем вектор
 	}
 	write();//записываем
-	cout << "теперь вектор такой" << endl;
-	for (int i = 0; i < vec.size(); i++)
-	{
-		cout << vec[i] << " ";
-	}
+	
 }
 
 //........................................................................................................................

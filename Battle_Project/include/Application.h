@@ -6,7 +6,7 @@
 #include "Base.h"
 #include "Message.h"
 #include<sstream>
-#include"bonus.h"
+//#include"bonus.h"
 #include<vector>
 
 using namespace std;
@@ -15,7 +15,7 @@ class Application : private sf::NonCopyable {
 private:
     bool gameOver;
     bool gameStarted;
-  
+    int createObjectForMapTimer;
 
     int frags;
    // int score;
@@ -27,7 +27,7 @@ private:
     Map map;
     Player mPlayer;
     Enemy* packOfEnemies;
-    Bonus mBonus;
+    //Bonus mBonus;
 
   
 
