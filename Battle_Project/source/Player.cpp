@@ -77,6 +77,7 @@ void Player::update(const sf::Int64& time, Map& map, const bool& collision) {
     mSprite.setPosition(mX, mY);//начальная позиция
     animate(time);//анимация
     map_interaction(map);//взаимодействие с картой
+    interactionBonus(map);
 
     bullet.update(map, time, mX, mY, mDir);//инициализация пули
     if (!bullet.present)//если не стреляем
@@ -89,7 +90,18 @@ void Player::update(const sf::Int64& time, Map& map, const bool& collision) {
         }
 }
 
-void Player::playerPosition()
+void Player::interactionBonus(Map &map)//........................................................
 {
-    mSprite.setPosition(600, 200);
-}
+        for (int i = mY / 24; i < (mY + mHeight) / 24; ++i)
+            for (int j = mX / 24; j < (mX + mWidth) / 24; ++j) {
+                char tile = map.get_tile(i, j);
+
+                
+                if (tile == '1' || tile == '2' || tile == '3')
+                {
+                    std::cout << "bonus!!" << std::endl;
+                    map.break_wall(i,j);
+                }
+            }
+
+    }

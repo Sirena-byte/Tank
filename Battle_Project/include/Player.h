@@ -7,7 +7,7 @@
 class Player : public Tank {
 public:
     Player();
-    void playerPosition();
+    void interactionBonus(Map& map);
     void move(const sf::Int64 &time);
     void update(const sf::Int64 &time, Map &map, const bool &collision);
     //void fillingRecordVector();//запилняем вектор

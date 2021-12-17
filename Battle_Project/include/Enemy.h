@@ -1,6 +1,6 @@
 #pragma once
 #include "Tank.h"
-#include"bonus.h"
+//#include"bonus.h"
 
 class Enemy : public Tank {
 private:

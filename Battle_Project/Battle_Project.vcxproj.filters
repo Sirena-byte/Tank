@@ -68,12 +68,6 @@
     <ClInclude Include="include\Application.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="source\bonus.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="include\bonus.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="include\menu.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>

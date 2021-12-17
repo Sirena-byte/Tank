@@ -39,4 +39,5 @@ public:
     const char get_tile(const int& i, const int& j) { return TileMap[i][j]; }// функция получения тайла
     void draw(sf::RenderWindow& window);//рисует 
     void randomBonusCreate();
+    void takeBonus(const int& i, const int& j);
 };

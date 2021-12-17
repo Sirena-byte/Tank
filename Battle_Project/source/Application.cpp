@@ -87,7 +87,7 @@ void Application::update(const sf::Int64& time)
         //gameOver = true;
      
         map.levelMap();
-        mPlayer.playerPosition();
+       // mPlayer.playerPosition();
         initialize();
     }
 

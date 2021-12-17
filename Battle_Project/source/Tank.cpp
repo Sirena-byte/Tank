@@ -40,9 +40,9 @@ void Tank::map_interaction(Map &map) {//взаимодействие с карт
         for (int j = mX / 24; j < (mX + mWidth) / 24; ++j) {
             char tile = map.get_tile(i, j);
 
-            if (tile >= '0' && tile <= '@'||tile=='#') {//если символ серый фон или бетон
+            if (tile == '0' || tile == '@'||tile=='#') {//если символ серый фон или бетон
                 if (mDy > 0.f)//если едем вверх
-                    mY = i * 24 - mHeight;//не знаю точно что это( наверное, обновление координаты ”)
+                    mY = i * 24 - mHeight;
 
                 if (mDy < 0.f)
                     mY = (float)i * 24 + 24;
@@ -53,6 +53,7 @@ void Tank::map_interaction(Map &map) {//взаимодействие с карт
                 if (mDx < 0.f)
                     mX = (float)j * 24 + 24;
             }
+           
         }
 
 }
