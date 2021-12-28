@@ -2,10 +2,10 @@
 #include <Map.h>
 #include"Enemy.h"
 
-Tank::Tank(const float &x, const float &y, const float &width, const float &height, const sf::String &file)
-    : life(true), mX(x), mY(y), mDx(0.f), mDy(0.f), mFile(file), mDir(0), mCollision(false),
-    mCurrentFrame(0.f), mSpeed(0.f), mWidth(width), mHeight(height), 
-    bullet(x, y) {//координаты пули
+Tank::Tank(const float& x, const float& y, const float& width, const float& height, const sf::String& file)
+    : life(true),tankLife(1), mX(x), mY(y), mDx(0.f), mDy(0.f), mFile(file), mDir(0), mCollision(false),
+    mCurrentFrame(0.f), mSpeed(0.f), mWidth(width), mHeight(height),
+    bullet(x, y)  {//координаты пули
 
     mTexture.loadFromFile(mFile);
     mSprite.setTexture(mTexture);
@@ -13,7 +13,7 @@ Tank::Tank(const float &x, const float &y, const float &width, const float &heig
     mSprite.setPosition(x, y);
 }
 
-void Tank::animate(const sf::Int64 &time) {//функция анимации танка
+void Tank::animate(const sf::Int64& time) {//функция анимации танка
     mCurrentFrame += 0.005f * time;
     if (mCurrentFrame >= 2)//если текущий кадр больше либо равно 2
         mCurrentFrame -= 2;//то возвращаемс¤ в начало
@@ -27,20 +27,25 @@ void Tank::animate(const sf::Int64 &time) {//функция анимации т�
     if (mDy < 0.0f)
         mSprite.setTextureRect(sf::IntRect(78 + 39 * (int)mCurrentFrame, 39, 39, 39));//вниз
 }
-
+//...............................взаимодействие пули с танком..................................................................................
 void Tank::collapse() {//в танк попала пуля
-
-    life = false;//танк мертв
+    tankLife--;
+    if (tankLife == 0) 
+    {
+        life = false;//танк мертв
+    }
     bullet.present = false;//пуля мертва
     mSprite.setPosition(0, 0);//танк в начала
 }
+//..................................................................................................................................................
 
-void Tank::map_interaction(Map &map) {//взаимодействие с картой
+
+void Tank::map_interaction(Map& map) {//взаимодействие с картой
     for (int i = mY / 24; i < (mY + mHeight) / 24; ++i)
         for (int j = mX / 24; j < (mX + mWidth) / 24; ++j) {
             char tile = map.get_tile(i, j);
 
-            if (tile == '0' || tile == '@'||tile=='#') {//если символ серый фон или бетон
+            if (tile == '0' || tile == '@' || tile == '#') {//если символ серый фон или бетон
                 if (mDy > 0.f)//если едем вверх
                     mY = i * 24 - mHeight;
 
@@ -53,7 +58,7 @@ void Tank::map_interaction(Map &map) {//взаимодействие с карт
                 if (mDx < 0.f)
                     mX = (float)j * 24 + 24;
             }
-           
+         
         }
 
 }

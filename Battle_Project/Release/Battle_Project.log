@@ -1,13 +1,9 @@
-﻿  Map.cpp
-C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Map.cpp(123,43): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Map.cpp(123,35): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Map.cpp(139,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-  Player.cpp
-C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Player.cpp(95,20): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
-C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Player.cpp(96,24): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+﻿  Player.cpp
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Player.cpp(98,16): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Battle_Project\source\Player.cpp(99,20): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
   Создание кода
-  5 of 421 functions ( 1.2%) were compiled, the rest were copied from previous compilation.
+  1 of 421 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    7 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   Создание кода завершено
   Battle_Project.vcxproj -> C:\Users\ionya\OneDrive\Рабочий стол\Battle_Project\Release\Battle_Project.exe

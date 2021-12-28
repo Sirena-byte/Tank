@@ -13,13 +13,13 @@ Player::Player()
     : Tank(244, 600, 39, 39, "media/playerSprites.png") {//инициализация игрока
     playerScore = 0;//очки игрока
     //record.reserve(10);//зарезервировала место на 10 ячеек
-   
+
   //recordPointLast = 0;
-   
+
     //temp = 0;
 
 
-    playerLife = 1;
+    //playerLife = 1;
 }
 
 void Player::move(const sf::Int64& time) {
@@ -57,7 +57,7 @@ void Player::move(const sf::Int64& time) {
     case 2:
         mDx = 0;
         mDy = mSpeed;//вверх;
-            break;
+        break;
 
     case 3:
         mDx = 0;
@@ -79,29 +79,38 @@ void Player::update(const sf::Int64& time, Map& map, const bool& collision) {
     map_interaction(map);//взаимодействие с картой
     interactionBonus(map);
 
+    //...............................................инициализация пули....................
     bullet.update(map, time, mX, mY, mDir);//инициализация пули
     if (!bullet.present)//если не стреляем
         if (Keyboard::isKeyPressed(Keyboard::Space)) {//если нажат пробел
             bullet.timeBeforeShot += time;
-            if (bullet.timeBeforeShot > 10.f) {//задержка между пулями
+            cout << "bullet.timeBeforShot= " << bullet.timeBeforeShot << endl;
+            if (bullet.timeBeforeShot > 3.f) {//задержка между пулями
                 bullet.present = true;//стреляем
                 bullet.timeBeforeShot = 0.f;//перезаряжаем))
             }
         }
 }
+//..................................................взаимодействие с бонусами.....................................
 
-void Player::interactionBonus(Map &map)//........................................................
+void Player::interactionBonus(Map& map)//........................................................
 {
-        for (int i = mY / 24; i < (mY + mHeight) / 24; ++i)
-            for (int j = mX / 24; j < (mX + mWidth) / 24; ++j) {
-                char tile = map.get_tile(i, j);
-
-                
-                if (tile == '1' || tile == '2' || tile == '3')
-                {
-                    std::cout << "bonus!!" << std::endl;
-                    map.break_wall(i,j);
-                }
+    for (int i = mY / 24; i < (mY + mHeight) / 24; ++i)
+        for (int j = mX / 24; j < (mX + mWidth) / 24; ++j) {
+            char tile = map.get_tile(i, j);
+            switch (tile)
+            {
+            case '1':break;
+            case '2':tankLife++; /*cout << "tankLife= " << tankLife << endl;*/ break;
+            case '3':break;
             }
 
-    }
+            if (tile == '1' || tile == '2' || tile == '3')
+            {
+                std::cout << "bonus!!" << std::endl;
+                map.break_wall(i, j);
+            }
+        }
+
+}
+//.........................................................................................................................

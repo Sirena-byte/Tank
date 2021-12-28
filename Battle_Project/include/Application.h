@@ -16,8 +16,8 @@ private:
     bool gameOver;
     bool gameStarted;
     int createObjectForMapTimer;
-
     int frags;
+   
    // int score;
     sf::RenderWindow mWindow;
     sf::Font font;
@@ -32,7 +32,7 @@ private:
   
 
 public:
- 
+    
     Application();
    
     void initialize();

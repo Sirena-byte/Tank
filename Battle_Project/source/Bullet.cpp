@@ -10,48 +10,48 @@ Bullet::Bullet(const float &x, const float &y)
     mSprite.setPosition(x, y);//устанавливаем позицию
 }
 
-void Bullet::move(const sf::Int64 &time) {//функци¤ движени¤ пули
+void Bullet::move(const sf::Int64 &time) {//функция движения пули
     switch (mDir) {//направление
         case 0:
-            mDx = 0.3f;//вправо
+            mDx = 0.15f;//вправо
             mDy = 0;
 			mSprite.setRotation(90.f);//спрайт поворачиваем на 90 градусов
             break;
 
         case 1:
-            mDx = -0.3f;//влево
+            mDx = -0.15f;//влево
             mDy = 0;
 			mSprite.setRotation(-90.f);
             break;
 
         case 2:
             mDx = 0;
-            mDy = 0.3f;//вверх
+            mDy = 0.15f;//вверх
 			mSprite.setRotation(180.f);
             break;
 
         case 3:
             mDx = 0;
-            mDy = -0.3f;//вниз
+            mDy = -0.15f;//вниз
 			mSprite.setRotation(0.f);
             break;
     }
 
-    mX += mDx * time;//?? задаем движение по иксу??
+    mX += mDx * time;// задаем движение по иксу
     mY += mDy * time;// то же по игрику
 	mSprite.setPosition(mX, mY);//устанавливаем позицию
 }
 
-void Bullet::update(Map &map, const sf::Int64 &time, float &x, const float &y, const int &dir) {//инициализаци¤ пули
+void Bullet::update(Map &map, const sf::Int64 &time, float &x, const float &y, const int &dir) {//инициализация пули
     if (present) {
-        move(time);//если пул¤ движетс¤
+        move(time);//если пуля движется
         map_interaction(map);//взаимодействует с картой
     }
     else {
-		mDir = dir;//определ¤ем направление
+		mDir = dir;//определяем направление
         switch (mDir) {
         case 0:
-            mX = x + 35.f;//пока не знаю, что это
+            mX = x + 35.f;
             mY = y + 15.f;
             break;
 
@@ -83,7 +83,7 @@ void Bullet::map_interaction(Map &map) {//взаимодействие с кар
                 present = false;//ничего не происходит
 
             if (tile == '#') {//если кирпич
-                map.break_wall(i, j);//стомать стену
+                map.break_wall(i, j);//сломать стену
                 present = false;// тайла нет
             }
         }

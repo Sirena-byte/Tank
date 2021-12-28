@@ -3,6 +3,7 @@
 #include "Tank.h"
 #include<vector>
 #include<iostream>
+//#include"Application.h"
 
 class Player : public Tank {
 public:
@@ -10,17 +11,9 @@ public:
     void interactionBonus(Map& map);
     void move(const sf::Int64 &time);
     void update(const sf::Int64 &time, Map &map, const bool &collision);
-    //void fillingRecordVector();//запилняем вектор
+   // Application application;
 
-    
     int playerScore;//текущие очки
-   
-
-
-    int playerLife;
     int level;
-  public:  
-    //int recordPointLast;//последний рекорд списка
-    //std::vector<int>record;//вектор для хранения рекордов
-    
+  
 };

@@ -12,18 +12,16 @@ using namespace std;
 int temp;//временная переменная
 Application::Application()
     : mWindow(sf::VideoMode(1000, 672), "Battle City"), gameOver(false), gameStarted(false),
-    /* msgStart(90, 330, "Press \'Enter\' to start"), msgOver(250, 300, "Game over"),
-     msgLost(260, 350, "You lost"), msgWon(),*/
     frags(0)
-    
+
 {
     //playerScore = 0;
     createObjectForMapTimer = 0;
     read();//..........................................................................считали файл
     menu(mWindow);//вызов меню
     initialize();
-   
-    
+
+
 }
 void Application::initialize()
 {
@@ -34,23 +32,23 @@ void Application::initialize()
         sf::Int64 time = clock.getElapsedTime().asMicroseconds();
         clock.restart();
         time /= 800;
-  
+
         process_events();
-        
+
         createObjectForMapTimer += time;
         if (createObjectForMapTimer > 8000)
         {
             map.randomBonusCreate();
             createObjectForMapTimer = 0;
         }
-        
-       // if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))// старт при нажатии ентер
-           gameStarted = true;
-        
+
+        // if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))// старт при нажатии ентер
+        gameStarted = true;
+
 
         if (gameStarted && !gameOver)
             update(time);
-       
+
         render();
     }
 }
@@ -72,7 +70,7 @@ void Application::process_events()
 
 void Application::update(const sf::Int64& time)
 {
-    
+
     for (int i(0); i < 4; ++i)
         if (!packOfEnemies[i].life)
             ++frags;//если враг убит, то флаг++
@@ -85,9 +83,9 @@ void Application::update(const sf::Int64& time)
     if (frags == 4)
     {
         //gameOver = true;
-     
+
         map.levelMap();
-       // mPlayer.playerPosition();
+        // mPlayer.playerPosition();
         initialize();
     }
 
@@ -95,7 +93,7 @@ void Application::update(const sf::Int64& time)
     {
         recordStatistics(temp);//сравниваем очки и записываем в файл
         gameOver = true;
-       
+
 
         //gameOver = false; gameStarted = false;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))// старт при нажатии ентер
@@ -145,16 +143,16 @@ void Application::update(const sf::Int64& time)
                 mPlayer.playerScore += 200;
 
 
-               
-               
-              if (mPlayer.playerScore != 0)
-               {
-                   temp = mPlayer.playerScore;//копируем очки во врекменную переменную
-             
-               }
-              
-               
-          
+
+
+                if (mPlayer.playerScore != 0)
+                {
+                    temp = mPlayer.playerScore;//копируем очки во врекменную переменную
+
+                }
+
+
+
                 mPlayer.bullet.present = false;
             }
         }
@@ -164,7 +162,7 @@ void Application::update(const sf::Int64& time)
         && mPlayer.bullet.present)
     {
         recordStatistics(temp);
-       mBase.life = false;
+        mBase.life = false;
         gameOver = true;
         initialize();
     }
@@ -180,9 +178,9 @@ void Application::render() //отрисовка
     font.loadFromFile("media/PressStart2P.ttf");//текущие очки
     sf::Text text("", font, 20);
     text.setOutlineColor(sf::Color::White);
-    std::ostringstream info,info2;
-   
-//...................................................................................................
+    std::ostringstream info, info2;
+
+    //...................................................................................................
 
     mWindow.clear();
 
@@ -191,7 +189,7 @@ void Application::render() //отрисовка
     if (mPlayer.life)//если игрок жив- рисуем игрока
     {
         mWindow.draw(mPlayer.mSprite);
-      
+
     }
 
     if (mPlayer.bullet.present)//рисуем пули
@@ -236,7 +234,7 @@ void Application::render() //отрисовка
             text.setPosition(260, 350);
             mWindow.draw(text);
 
-   //...........................................................................................................
+            //...........................................................................................................
 
             text.setString("Press \'Enter\' to start");
             text.setPosition(90, 530);
@@ -248,7 +246,7 @@ void Application::render() //отрисовка
                 mWindow.close();
                 Application();
             }
-  //.................................................................................................................
+            //.................................................................................................................
         }
         else
         {
@@ -256,11 +254,11 @@ void Application::render() //отрисовка
             text.setPosition(265, 350);
             mWindow.draw(text);
         }
-        
+
     }
     //.................................................................................................................................
 
-    info <<mPlayer.playerScore;
+    info << mPlayer.playerScore;
     text.setString("score: " + info.str());//выводим очки игрока
     text.setPosition(750, 30);
     mWindow.draw(text);
@@ -273,28 +271,28 @@ void Application::render() //отрисовка
     text.setPosition(750, 250);
     mWindow.draw(text);
     info.str(" ");
-   
+
     int num = 1;
     int  y = 300;
-    
-        for (int i = 0; i < vec.size(); i++)
-        {
-            int sum = vec[i];
-            
-        
-            info <<setw(2)<<num;
-            info2 << sum;
-            text.setString(info.str() + " : " + info2.str());
-            text.setPosition(750, y);
-            mWindow.draw(text);
-            y += 20;
-            info.str("");//очисчаем переменные
-            info2.str("");
-            num++;
-        }
- //......................................................................................  
-        //mBonus.BonusDraw();
-        //mBonus.TimerBonus();
-    
+
+    for (int i = 0; i < vec.size(); i++)
+    {
+        int sum = vec[i];
+
+
+        info << setw(2) << num;
+        info2 << sum;
+        text.setString(info.str() + " : " + info2.str());
+        text.setPosition(750, y);
+        mWindow.draw(text);
+        y += 20;
+        info.str("");//очисчаем переменные
+        info2.str("");
+        num++;
+    }
+    //......................................................................................  
+           //mBonus.BonusDraw();
+           //mBonus.TimerBonus();
+
     mWindow.display();
 }
